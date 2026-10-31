@@ -1,0 +1,175 @@
+name: build
+
+# Lint, tests, puis exécutables et installateurs Windows / macOS / Linux, version web (vérifiée dans un navigateur) et archive des sources.
+# Un tag « v1.2.3 » publie les livrables dans une release GitHub.
+#
+# Signature (facultative : sans secrets, les livrables sont simplement non signés). Secrets du dépôt :
+#   macOS   : MACOS_CERT_P12 (certificat « Developer ID Application » en base64), MACOS_CERT_PASSWORD, CODESIGN_IDENTITY,
+#             APPLE_ID, APPLE_TEAM_ID, APPLE_APP_PASSWORD (notarisation)
+#   Windows : WINDOWS_CERT_PFX (certificat .pfx en base64), WINDOWS_CERT_PASSWORD
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install ruff
+      - run: ruff check .
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+      - run: python main.py --check
+
+  executables:
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      CODESIGN_IDENTITY: ${{ secrets.CODESIGN_IDENTITY }}
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+      WINDOWS_CERT_PASSWORD: ${{ secrets.WINDOWS_CERT_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements-build.txt
+
+      # macOS : le certificat entre dans un trousseau temporaire (sans secret, on ne signe pas).
+      - name: Certificat macOS
+        if: runner.os == 'macOS' && env.CODESIGN_IDENTITY != ''
+        env:
+          MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+        run: |
+          echo "$MACOS_CERT_P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security create-keychain -p ci "$RUNNER_TEMP/ci.keychain"
+          security set-keychain-settings -lut 21600 "$RUNNER_TEMP/ci.keychain"
+          security unlock-keychain -p ci "$RUNNER_TEMP/ci.keychain"
+          security import "$RUNNER_TEMP/cert.p12" -P "$MACOS_CERT_PASSWORD" -A -t cert -f pkcs12 -k "$RUNNER_TEMP/ci.keychain"
+          security set-key-partition-list -S apple-tool:,apple: -s -k ci "$RUNNER_TEMP/ci.keychain"
+          security list-keychains -d user -s "$RUNNER_TEMP/ci.keychain" login.keychain
+      - name: Certificat Windows
+        if: runner.os == 'Windows' && env.WINDOWS_CERT_PASSWORD != ''
+        shell: bash
+        env:
+          WINDOWS_CERT_PFX: ${{ secrets.WINDOWS_CERT_PFX }}
+        run: |
+          echo "$WINDOWS_CERT_PFX" | base64 --decode > "$RUNNER_TEMP/cert.pfx"
+          echo "WINDOWS_CERT_FILE=$RUNNER_TEMP/cert.pfx" >> "$GITHUB_ENV"
+
+      - run: python packaging/build.py exe
+      - name: Contrôle de l'exécutable
+        shell: bash
+        run: |
+          case "$RUNNER_OS" in
+            Windows) ./build/pyinstaller/dist/StarInfiltration/StarInfiltration.exe --version ;;
+            macOS) ./build/pyinstaller/dist/StarInfiltration.app/Contents/MacOS/StarInfiltration --check ;;
+            Linux) ./build/pyinstaller/dist/StarInfiltration/StarInfiltration --check ;;
+          esac
+
+      # Installateurs : .dmg (macOS, notarisé si les identifiants sont là), -setup.exe (Windows, Inno Setup), .AppImage (Linux).
+      - name: Installateur macOS (.dmg)
+        if: runner.os == 'macOS'
+        run: python packaging/build.py dmg
+      - name: Installateur Windows (-setup.exe)
+        if: runner.os == 'Windows'
+        run: |
+          choco install innosetup -y --no-progress
+          python packaging/build.py installer
+      - name: AppImage Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update && sudo apt-get install -y libfuse2
+          curl -fsSL -o appimagetool https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool
+          APPIMAGETOOL="$PWD/appimagetool" python packaging/build.py appimage
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: executable-${{ matrix.os }}
+          path: |
+            dist/*.zip
+            dist/*.dmg
+            dist/*-setup.exe
+            dist/*.AppImage
+
+  web:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: pip install -r requirements-build.txt
+      - run: python packaging/build.py web --strict   # sons convertis en .ogg : sans ffmpeg, la construction échoue
+      # Vérification de bout en bout dans un vrai navigateur : la page charge, le menu démarre, aucune erreur Python en console.
+      - run: |
+          pip install playwright pillow
+          playwright install --with-deps chromium
+          mkdir -p web-check && unzip -q dist/*-web.zip -d web-check
+          python packaging/web/smoke.py web-check dist/web-smoke.png
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: web-smoke-screenshot
+          path: dist/web-smoke.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: dist/*-web.zip
+
+  source:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: python packaging/build.py zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source
+          path: dist/*.zip
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [executables, web, source]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+          pattern: "!web-smoke-screenshot"
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.zip
+            dist/*.dmg
+            dist/*-setup.exe
+            dist/*.AppImage

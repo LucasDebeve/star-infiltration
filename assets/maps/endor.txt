@@ -1,0 +1,57 @@
+; Endor, le bunker du generateur - Star Infiltration (44 x 28 tuiles) : mission "voler les plans"
+; # mur (rondins)  . sol (terre)  D porte  P depart  G garde  K badge  T terminal  E sortie  L leurre  R renforts  B caisse  a champ de force  1 bouton
+; Mission : voler les plans du generateur de bouclier dans le bunker (nord-est), puis revenir a la zone d'extraction (sud-ouest).
+; Progression : badge 1 (generateur, sud) -> caserne (nord-ouest) et son bouton 1 -> champ de force du sud-est -> badge 2 -> bunker.
+@theme endor
+############################################
+#.............#..............#.............#
+#.............#............BB#.............#
+#..1G.........#...G..........#..........T..#
+#.............#..............#...BB........#
+#.....BB......#..............#.............#
+#.....BB....L.#...BB.........#..G..........#
+#.............#.T............#.............#
+#.............#.......B......#........BB...#
+#.............#..............#.............#
+#######DD############..############DD#######
+#..........................................#
+#.R.G.......B...........L.....B.....L...GR.#
+#..........................................#
+#######..############..############aa#######
+#.............#..............#.............#
+#............B#..............#........BB...#
+#.............#..G...........#.............#
+#........BB...#.........BB...#.............#
+#........BB...#.........BB...#.............#
+#..L..........#.....L........#...BB........#
+#.....B.......#..............#.............#
+#.............#...BB.........#.............#
+#.............#..............#.............#
+#...P......E..#...........K..#..G.......K..#
+#.............#..............#...........R.#
+#.............#..............#.............#
+############################################
+
+; Le terminal de la salle centrale-nord ne telecharge rien : il desactive la camera du couloir et coupe la lumiere de sa salle.
+@lockdown 160
+@terminal 16,7 -> cameras lights
+@camera 14,14 -> N a
+@camera 28,10 -> S a
+
+@patrol 4,3 -> 11,3 11,8 4,8
+@patrol 18,3 -> 26,3 26,8 18,8
+@patrol 32,6 -> 40,6 40,8 32,8
+@patrol 17,17 -> 26,17 26,24 17,24
+@patrol 32,24 -> 40,24 40,17
+@patrol 4,12 -> 20,12
+@patrol 40,12 -> 24,12
+
+@door 7,10 -> 1
+@door 35,10 -> 2
+@keycard 26,24 -> 1
+@keycard 40,24 -> 2
+
+---
+; Le champ de force du sud-est est actif au depart : le bouton 1 (caserne) l'ouvre.
+field a closed
+button 1 toggles a

@@ -1,0 +1,18 @@
+# Linter : `ruff check .` (la CI le lance avant les tests). Le style du projet : lignes longues assumées, commentaires en français.
+line-length = 230
+target-version = "py39"
+extend-exclude = ["venv", "dist", "build", "assets"]
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = [
+    "UP006", "UP007", "UP035", "UP037", "UP045",  # le code garde `dict[...]`/`X | None` via `from __future__ import annotations` (Python 3.9)
+    "B905",  # zip() sans strict= : Python 3.9
+]
+
+[lint.per-file-ignores]
+"packaging/star_infiltration.spec" = ["F821"]  # noms fournis par PyInstaller
+"tests/*" = ["B011", "B017", "B018", "B007", "E741"]
+
+[lint.isort]
+known-first-party = ["game", "tests", "packaging"]

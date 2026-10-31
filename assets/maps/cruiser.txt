@@ -1,0 +1,106 @@
+; Le croiseur impérial - Star Infiltration (72 x 48 tuiles) : niveau principal
+; # mur  . sol  D porte  P depart  G garde  K badge  T terminal  E sortie  L leurre sonore  R arrivee des renforts
+; B caisse / conteneur  S vaisseau (rectangle plein)  F champ de force (ligne droite)  (espace) le vide de l'espace
+; @patrol x,y -> ... : itineraire du garde place en (x, y)   @door x,y -> n : niveau de badge   @keycard x,y -> n : niveau du badge
+; @ship x,y -> N|E|S|O : orientation d'un vaisseau (le nez)
+; Mission : atteindre le poste de commandement (nord-est), pirater le terminal, puis fuir par le quai d'amarrage (sud-est).
+; Les salles du sud communiquent par des tunnels de service : on peut eviter la coursive centrale, bien gardee.
+; Champs de force commutables (a-z) et boutons (1-9) : voir la section apres '---' en fin de fichier.
+; Progression : badge 1 (ingenierie) -> badge 2 (casernes) -> badge 3 (quartiers des officiers) -> poste de commandement.
+########################################################################
+########################################################################
+########################################################################
+##..................#...................#.................#....#...#..##
+##.K............G...#................L..#...............K.#.3..#.T.#..##
+##..................#..##..##....##.....#.......B.........#...G.ccc...##
+##...####...####....#..##..##.G..##.....#...G.............#..###......##
+##...####...####....#..##..##....##.....#.................#..###......##
+##..................#..##..##....##.....#....#######......#.......###.##
+##..................D..##...............D....#######......D.......###.##
+##...####...####....D...................D.................D...........##
+##...####...####....#................##.#.................#..###......##
+##..................#...BBB..........##.#..BB..........##.#..###......##
+##............G..BB.#...BBB..........##.#..BB..........##.#...........##
+##..##...........BB.#..L.............##.#.........G....##.#.........G.##
+##..................#...................#.................#...........##
+##..................#...................#..T..............#...........##
+##########DD##################DD#################DD#####################
+##########..##################..#################..#####################
+##########..##################..#################..#####################
+##########..##################..#################..#####################
+##########..##################..#################..#####################
+##..G.B...............B..................B............B...........G..R##
+##R..............B........B.G................B..................B.....##
+###########..######################..######################..###########
+###########..######################..######################..###########
+###########..######################..######################..###########
+###########..######################..######################..###########
+###########..######################..######################..###########
+###########DD######################DD######################DD###########
+##....................####....................####....................##
+##.BB..........BBB..B.####...............BB...####.B..................##
+##.....B............B.####..............GBB...####..........G.....BB..##
+##........BB......G...####...##...............####....BBB.........BB..##
+##..P.....BB.........1####...##............K..####....BBB.............##
+##....L...............D.a......................b.D........B...........##
+##...........L........D.a.........BB...........b.D...G....B....SSSSS..##
+##...SSSSS............####........BB.........2####..L.........ESSSSS..##
+##...SSSSS....SSS.....####.BB.................####......SSS....SSSSS..##
+##...SSSSS....SSS.....####.BB.........BBB.....####..BBB.SSS....SSSSS..##
+##...SSSSS....SSS.....####..L..B......BBB.....####..BBB.SSS...........##
+##....................####....................####...................R##
+##FFFFFFFFFFFFFFFFFFFF############################FFFFFFFFFFFFFFFFFFFF##
+##                    ############################                    ##
+##                    ############################                    ##
+##                    ############################                    ##
+##                    ############################                    ##
+##                    ############################                    ##
+
+; Terminaux : le poste de commandement telecharge les plans ; celui de la caserne desactive les cameras et coupe la lumiere de sa salle.
+@lockdown 140
+@waves 3
+@terminal 65,4 -> data
+@terminal 43,16 -> cameras lights
+; Cameras de surveillance (mur, direction, groupe) : deux dans la coursive, une devant l'alcove du poste de commandement.
+@camera 20,21 -> S a
+@camera 52,24 -> N a
+@camera 64,2 -> S b
+
+@patrol 4,22 -> 25,22
+@patrol 28,23 -> 46,22
+@patrol 66,22 -> 50,23
+@patrol 18,33 -> 18,41
+@patrol 40,32 -> 30,32 30,38
+@patrol 60,32 -> 60,41
+@patrol 53,36 -> 55,36 55,41 53,41
+@patrol 14,13 -> 7,13
+@patrol 16,4 -> 9,4 9,9
+@patrol 30,6 -> 36,10 24,14
+@patrol 44,6 -> 54,6 54,11
+@patrol 50,14 -> 44,14
+@patrol 62,5 -> 62,14
+@patrol 68,14 -> 60,14
+
+@door 10,17 -> 1
+@door 30,17 -> 1
+@door 49,17 -> 2
+@door 40,9 -> 2
+@door 58,9 -> 3
+@keycard 43,34 -> 1
+@keycard 3,4 -> 2
+@keycard 56,4 -> 3
+@ship 5,37 -> S
+@ship 14,38 -> S
+@ship 63,36 -> S
+@ship 56,38 -> S
+
+---
+; Champs de force commutables : `closed` = actif (bloquant) au départ, `open` = inactif.
+; Chaque pression d'un bouton inverse tous les champs liés.
+; Le bouton 1 (hangar) ouvre le tunnel du hangar et ferme celui du quai : il faut ensuite le bouton 2 (ingenierie) pour rouvrir le quai.
+field a closed
+field b open
+field c closed
+button 1 toggles a b
+button 2 toggles b
+button 3 toggles c

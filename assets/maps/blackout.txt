@@ -1,0 +1,52 @@
+; Coupure de courant (base de Tatooine) - Star Infiltration (50 x 26 tuiles) : mission "couper l'alimentation"
+@theme tatooine
+; # mur  . sol  D porte  P depart  G garde  K badge  C console de la salle de controle  E sortie  L leurre sonore  R arrivee des renforts
+; B caisse / conteneur  a champ de force commutable  1 bouton
+; Q (prisonnier) est reserve a la future mission de liberation : non utilise ici.
+; Mission : atteindre la salle de controle (nord-est) et couper l'alimentation, puis fuir par la salle du hangar (sud-est).
+; Progression : badge 1 (magasin, sud) -> salle des machines -> badge 2 -> salle de controle. Le bouton 1 ouvre l'acces a la sortie.
+##################################################
+#................#..............#................#
+#................#..............#................#
+#...G.......BB...#..G........K..#.......BB....C..#
+#....BB..........#..............#.......BB.......#
+#....BB..........#..............#................#
+#................#..BB..........#...G............#
+#..B..........L..#..............#................#
+#................#..............#................#
+#................#..............#................#
+########..##############DD##############DD########
+#................................................#
+#.R.G...............L...............L.......G..R.#
+#................................................#
+########..##############..##############aa########
+#................#..............#................#
+#................#..G...........#..............R.#
+#.........BB.....#..............#................#
+#....L....BB.....#...BB.........#...........B....#
+#................#..............#...BB......B....#
+#.............B..#.........BB...#...BB...........#
+#.............B..#..............#................#
+#..P.............#....1......K..#.............E..#
+#................#..............#...G............#
+#................#..............#................#
+##################################################
+
+@lockdown 150
+@patrol 4,3 -> 14,3 14,8 4,8
+@patrol 20,3 -> 30,3 30,8 20,8
+@patrol 36,6 -> 46,6 46,8 36,8
+@patrol 20,16 -> 30,16 30,22 20,22
+@patrol 36,23 -> 46,23 46,16
+@patrol 4,12 -> 22,12
+@patrol 44,12 -> 28,12
+
+@door 24,10 -> 1
+@door 40,10 -> 2
+@keycard 29,22 -> 1
+@keycard 29,3 -> 2
+
+---
+; Le champ de la porte sud-est est actif au depart : le bouton 1 (magasin) l'ouvre.
+field a closed
+button 1 toggles a

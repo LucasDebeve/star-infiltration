@@ -1,0 +1,42 @@
+; Entrainement - Star Infiltration (51 x 12 tuiles) : cinq salles, une decouverte par salle, de gauche a droite.
+;   1. Deplacement et caisses (obstacles) ; ramassez le leurre (L) en marchant dessus.
+;   2. Une porte libre : approchez-vous et appuyez sur E. Le badge (K) est sur le sol.
+;   3. Une porte a badge (les voyants indiquent le niveau). Puis un bouton (1) : appuyez sur E pour ouvrir le champ de force.
+;   4. Un garde patrouille. Restez hors de son cone de vision, derriere les caisses, ou lancez le leurre (F) pour le detourner.
+;   5. Le terminal (T) : maintenez E pour pirater. Puis rejoignez la sortie (E).
+; # mur  . sol  D porte  P depart  G garde  K badge  T terminal  E sortie  L leurre  B caisse  a champ de force  1 bouton
+###################################################
+#.........#.........#.........#.........#.........#
+#....B..B.#.......K.#...B.....#....G....#....T....#
+#....B....#.........#.........#......B..#.........#
+#.........#.........#.........#.........#.........#
+#.P.......D.........D.........a...................#
+#.........D.........D.........a...................#
+#.........#.........#.........#.........#.........#
+#......L..#...BB....#.....1...#..B......#......E..#
+#.........#.........#.........#.........#.........#
+#.........#.........#.........#.........#.........#
+###################################################
+
+; Reglage de la carte : un verrouillage tres tolerant pour apprendre sans pression.
+@lockdown 240
+@patrol 35,2 -> 35,9
+@door 20,5 -> 1
+
+; Astuces contextuelles (elles apparaissent quand on s'approche, et disparaissent une fois comprises) : x,y -> nom [rayon en tuiles]
+@tip 3,5 -> move 5
+@tip 6,3 -> crouch 3
+@tip 7,8 -> pickup 2.5
+@tip 8,5 -> door 2.5
+@tip 18,3 -> pickup 2.5
+@tip 18,5 -> badge_door 2.5
+@tip 26,7 -> button 3
+@tip 34,6 -> guard 5
+@tip 34,6 -> decoy 5
+@tip 44,4 -> hack 3.5
+@tip 47,7 -> exit 3.5
+
+---
+; Le bouton 1 ouvre (ou referme) le champ de force a.
+field a closed
+button 1 toggles a

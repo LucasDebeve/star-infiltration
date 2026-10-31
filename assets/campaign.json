@@ -1,0 +1,189 @@
+{
+  "missions": [
+    {
+      "id": "training",
+      "title": "Entraînement",
+      "map": "training.txt",
+      "par_time": 75,
+      "episode": "ÉPISODE I",
+      "objective": "steal_plans",
+      "danger": 1,
+      "summary": "Cinq salles, cinq gestes : apprenez les bases de l'infiltration avant de vous attaquer à un vrai croiseur.",
+      "prologue": "Il y a longtemps, dans une galaxie lointaine, très lointaine...",
+      "intro": [
+        "L'Empire règne sur la galaxie d'une main de fer. Dans l'ombre, l'Alliance rebelle rassemble ses derniers agents pour frapper là où personne ne l'attend.",
+        "Vous êtes l'une de ces recrues. Avant de vous confier une vraie mission, le commandement vous envoie dans un simulateur de cellules abandonnées, où portes, badges, champs de force et gardes attendent votre première leçon.",
+        "Soyez discret, soyez patient. Un agent qui se fait remarquer ne revient jamais."
+      ]
+    },
+    {
+      "id": "outpost",
+      "title": "Avant-poste de Tatooine",
+      "map": "outpost.txt",
+      "par_time": 80,
+      "episode": "ÉPISODE II",
+      "objective": "steal_plans",
+      "danger": 2,
+      "summary": "Infiltrez un petit avant-poste sur Tatooine : volez les plans dans la salle des serveurs, en vous aidant du terminal de la garde pour couper la caméra.",
+      "intro": [
+        "L'entraînement est terminé. La première vraie mission de l'Alliance vous attend sur Tatooine, dans un avant-poste impérial perdu au milieu des dunes.",
+        "Ses serveurs conservent les plans d'un convoi de ravitaillement. Une caméra surveille la porte de la salle des serveurs, mais le terminal de la salle de garde sait la couper.",
+        "Prenez le badge, choisissez bien votre moment, et revenez par la cour. Peu de gardes, peu de marge d'erreur."
+      ]
+    },
+    {
+      "id": "blackout",
+      "title": "Coupure de courant",
+      "map": "blackout.txt",
+      "par_time": 110,
+      "episode": "ÉPISODE III",
+      "objective": "cut_power",
+      "danger": 2,
+      "summary": "Dans une base impériale de Tatooine, coupez l'alimentation depuis la salle de contrôle, puis fuyez par le hangar.",
+      "intro": [
+        "Les plans volés à l'avant-poste de Tatooine révèlent une faiblesse : la base impériale voisine alimente les radars qui guident toute la flotte du secteur depuis une unique centrale d'énergie.",
+        "L'Alliance prépare une attaque, mais les radars verraient venir ses vaisseaux à des lieues. Une seule coupure de courant, et ils seront aveugles.",
+        "Votre mission : traverser le magasin et la salle des machines, rejoindre la salle de contrôle et abaisser les disjoncteurs. Les lumières s'éteindront, et dans le noir, on vous repérera moins bien.",
+        "Puis fuyez, agent, par le hangar, avant que l'Empire ne rétablisse le courant."
+      ]
+    },
+    {
+      "id": "endor",
+      "title": "Le bunker d'Endor",
+      "map": "endor.txt",
+      "par_time": 150,
+      "episode": "ÉPISODE IV",
+      "objective": "steal_plans",
+      "danger": 3,
+      "summary": "Dans la forêt d'Endor, volez les plans du générateur de bouclier au fond du bunker, puis regagnez la zone d'extraction.",
+      "intro": [
+        "Sur la lune forestière d'Endor, l'Empire achève un générateur de bouclier capable de protéger sa plus puissante arme. Il est caché dans un bunker au cœur de la forêt.",
+        "Les éclaireurs de l'Alliance ont repéré l'entrée. Mais pour détruire le bouclier, il faut d'abord en connaître les failles : elles sont dans un terminal, tout au fond du bunker.",
+        "Vous devrez récupérer deux badges, ouvrir un champ de force depuis la caserne, éviter les caméras du couloir, puis pirater le terminal avant de revenir à votre point d'extraction.",
+        "Que la Force soit avec vous, agent."
+      ]
+    },
+    {
+      "id": "uniform",
+      "title": "Le vestiaire impérial",
+      "map": "uniform.txt",
+      "par_time": 160,
+      "episode": "ÉPISODE V",
+      "objective": "steal_uniform",
+      "danger": 3,
+      "summary": "Fouillez le casier d'un officier dans les quartiers de la garnison et dérobez son uniforme, sans vous faire repérer.",
+      "intro": [
+        "Sur Endor, les plans de l'Empire ne sont accessibles qu'à ceux qui portent l'uniforme. Un officier de la garnison garde le sien dans un casier, au fond des quartiers.",
+        "Deux caméras surveillent la coursive, et les quartiers des officiers sont fermés par un badge de niveau 2. Un terminal du poste de garde pourra couper les caméras.",
+        "Fouillez le casier (maintenez E), puis rejoignez la cour d'extraction. Une fois l'uniforme sur le dos, appuyez sur U pour l'enfiler : ne courez pas, et gardez vos distances."
+      ]
+    },
+    {
+      "id": "radar",
+      "title": "Le poste radar d'Endor",
+      "map": "radar.txt",
+      "par_time": 175,
+      "episode": "ÉPISODE VI",
+      "objective": "cut_power",
+      "danger": 3,
+      "summary": "Atteignez le dôme du radar d'Endor et coupez son alimentation, malgré les caméras, les champs de force et une garnison nombreuse.",
+      "intro": [
+        "Le bouclier d'Endor ne tient que parce qu'un grand radar, caché sous un dôme au centre de la forêt, guide ses défenses. Sans lui, la flotte rebelle pourrait approcher.",
+        "La garnison est plus nombreuse qu'au bunker, et les allées sont surveillées par trois caméras. Deux terminaux de service pourront vous aider : l'un coupe les caméras, l'autre éteint la salle de l'entrepôt.",
+        "Récupérez les badges, ouvrez le champ de l'entrepôt, atteignez la console du dôme et coupez le courant. Puis rejoignez la cour d'extraction avant que l'Empire ne réagisse."
+      ]
+    },
+    {
+      "id": "prison",
+      "title": "Le centre de détention",
+      "map": "prison.txt",
+      "par_time": 205,
+      "episode": "ÉPISODE VII",
+      "objective": "free_prisoner",
+      "danger": 4,
+      "summary": "Libérez un agent capturé dans le bloc de détention d'une base de Tatooine : ouvrez les cellules depuis un terminal, puis ressortez avec lui.",
+      "intro": [
+        "Un agent de l'Alliance, qui connaît les plans de l'offensive, a été capturé et enfermé dans le bloc de détention d'une base impériale de Tatooine.",
+        "Les cellules sont verrouillées électroniquement : aucun badge n'ouvre leurs portes, seul le terminal du bloc le peut, et le bruit des grilles attirera les gardes. Il faut d'abord passer la caserne, ouvrir le champ de la coursive, puis traverser le bloc.",
+        "Une fois libre, l'agent vous suivra : il marche à votre allure, mais ne saura pas se cacher. Ne le laissez pas en arrière : il faut ressortir avec lui."
+      ]
+    },
+    {
+      "id": "hangar",
+      "title": "Le hangar de la flotte",
+      "map": "hangar.txt",
+      "par_time": 240,
+      "episode": "ÉPISODE VIII",
+      "objective": "steal_plans",
+      "danger": 4,
+      "summary": "Traversez un immense hangar impérial, ses ponts et ses champs de force, jusqu'à la tour de contrôle où dorment les plans de la flotte.",
+      "intro": [
+        "L'Alliance a localisé le grand hangar où l'Empire rassemble sa flotte avant l'offensive. Dans la tour de contrôle, un terminal renferme les ordres de bataille.",
+        "Le hangar est un labyrinthe de vaisseaux, de caisses et de cloisons à champ de force. Trois badges, deux boutons et trois caméras se dressent entre vous et la tour.",
+        "Deux terminaux de service peuvent couper les caméras et éteindre une salle. Servez-vous-en : à ce niveau, un seul faux pas déclenche l'alerte générale."
+      ]
+    },
+    {
+      "id": "theft",
+      "title": "Vol de la navette",
+      "map": "theft.txt",
+      "par_time": 255,
+      "episode": "ÉPISODE IX",
+      "objective": "steal_ship",
+      "danger": 4,
+      "summary": "Rejoignez la salle de contrôle, libérez les vaisseaux de leurs rayons tracteurs et de leurs attaches, puis volez la navette de la baie.",
+      "intro": [
+        "Pour approcher le croiseur Vigilance sans éveiller les soupçons, l'Alliance a besoin d'une navette impériale. Il y en a une, parmi d'autres, dans la baie d'atterrissage d'une base proche.",
+        "Les vaisseaux y sont retenus par des rayons tracteurs et des attaches que seule la console de la salle de contrôle sait désactiver. La baie est gardée, quatre caméras la surveillent, et la cloison du hangar est fermée.",
+        "Atteignez la console, libérez les vaisseaux, puis courez jusqu'à la passerelle de la navette marquée par une flèche verte : une fois à bord, plus personne ne vous rattrapera."
+      ]
+    },
+    {
+      "id": "hq",
+      "title": "Le quartier général",
+      "map": "hq.txt",
+      "par_time": 265,
+      "episode": "ÉPISODE X",
+      "objective": "steal_plans",
+      "danger": 4,
+      "summary": "Les plans sont dans le centre de commandement, derrière une porte réservée au personnel : il faudra y entrer déguisé en officier.",
+      "intro": [
+        "Le quartier général de la garnison abrite le centre de commandement, où dorment les plans de la flotte. L'aile qui y mène est fermée par une porte du personnel : aucun badge ne l'ouvre, seul l'uniforme impérial passe le contrôle.",
+        "Volez d'abord l'uniforme dans le casier des casernes, enfilez-le (touche U), puis franchissez le contrôle et traversez l'aile est. Marchez, sans courir, et ne vous approchez pas des gardes : de près, ils vous reconnaîtront.",
+        "Dans le centre de commandement, téléchargez les plans, puis fuyez : à la première alerte, l'uniforme ne trompe plus personne."
+      ]
+    },
+    {
+      "id": "cruiser",
+      "title": "Le croiseur impérial",
+      "map": "cruiser.txt",
+      "par_time": 275,
+      "episode": "ÉPISODE XI",
+      "objective": "steal_plans",
+      "danger": 4,
+      "summary": "Infiltrez le croiseur, volez les plans de l'offensive impériale dans le poste de commandement, puis fuyez par le quai.",
+      "intro": [
+        "À bord de la navette volée, l'Alliance approche enfin du croiseur impérial Vigilance, ancré au-dessus d'une planète frontalière.",
+        "Dans son poste de commandement, un terminal renferme les plans de la prochaine offensive de l'Empire. Sans ces données, la flotte rebelle est condamnée.",
+        "Vous devrez traverser le hangar, les quartiers de l'équipage et les ponts des officiers, réunir trois badges, pirater le terminal puis fuir par le quai d'amarrage avant que le croiseur ne soit verrouillé.",
+        "Bonne chance, agent. L'espoir de la rébellion repose sur vous."
+      ]
+    },
+    {
+      "id": "destroyer",
+      "title": "Le Destroyer",
+      "map": "destroyer.txt",
+      "par_time": 345,
+      "episode": "ÉPISODE XII",
+      "objective": "cut_power",
+      "danger": 5,
+      "summary": "Mission finale : traversez un Destroyer entier jusqu'à son réacteur, coupez l'alimentation du vaisseau amiral et fuyez par le hangar.",
+      "intro": [
+        "Tout converge vers lui : le Destroyer amiral de l'Empire. Ses défenses, ses radars et son bouclier dépendent d'un unique réacteur, au cœur du vaisseau.",
+        "C'est la mission la plus dangereuse de la campagne. Dix-sept gardes, cinq caméras, des champs de force et trois niveaux de badge. Trois terminaux de service sont à votre disposition : apprenez à vous en servir.",
+        "Atteignez le réacteur, coupez l'alimentation, puis fuyez par le hangar. Si vous réussissez, la flotte rebelle pourra enfin passer à l'attaque.",
+        "Que la Force soit avec vous. Vous en aurez besoin."
+      ]
+    }
+  ]
+}
