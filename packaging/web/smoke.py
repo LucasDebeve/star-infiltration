@@ -15,6 +15,8 @@ import threading
 from pathlib import Path
 
 WAIT_MS = 25_000  # le temps de télécharger le moteur Python/WebAssembly et de lancer le menu
+MAX_WAIT_MS = 120_000  # on sonde la capture jusqu'à ce délai : un runner lent met plus longtemps à charger le moteur
+POLL_MS = 5_000
 BAD_MARKERS = ("Traceback", "Uncaught", "ModuleNotFoundError", "ImportError", "pygame.error", "Error:")
 IGNORED = ("favicon", "net::ERR_BLOCKED_BY_CLIENT", "AudioContext")  # bruit sans conséquence
 
@@ -27,6 +29,18 @@ def console_problems(messages: list[str]) -> list[str]:
 def is_blank(pixels: set[tuple[int, int, int]] | list, threshold: int = 8) -> bool:
     """Vrai si la capture n'a (presque) qu'une couleur : la page n'a rien dessiné."""
     return len(set(pixels)) < threshold
+
+
+def pixels_of(image) -> list:
+    """Les pixels d'une image Pillow (`getdata` est déprécié depuis Pillow 12, `get_flattened_data` le remplace)."""
+    getter = getattr(image, "get_flattened_data", None) or image.getdata
+    return list(getter())
+
+
+def shot_is_blank(path: Path) -> bool:
+    from PIL import Image
+
+    return is_blank(pixels_of(Image.open(path).convert("RGB").resize((64, 36))))
 
 
 def serve(directory: Path) -> tuple[http.server.ThreadingHTTPServer, int]:
@@ -55,20 +69,24 @@ def main(argv: list[str]) -> int:
             page = browser.new_page(viewport={"width": 1280, "height": 720})
             page.on("console", lambda m: messages.append(m.text))
             page.on("pageerror", lambda e: messages.append(f"Uncaught {e}"))
+            page.on("requestfailed", lambda r: print("requête échouée :", r.url, r.failure))
             page.goto(f"http://127.0.0.1:{port}/index.html")
             page.wait_for_selector("canvas", timeout=WAIT_MS)
             page.mouse.click(640, 360)  # geste utilisateur : sans lui, pygbag attend « Ready to start »
             page.wait_for_timeout(WAIT_MS)
             page.screenshot(path=str(shot))
+            waited = WAIT_MS
+            while shot_is_blank(shot) and waited < MAX_WAIT_MS:  # moteur encore en téléchargement : on réessaie
+                page.wait_for_timeout(POLL_MS)
+                waited += POLL_MS
+                page.screenshot(path=str(shot))
             browser.close()
     finally:
         server.shutdown()
     problems = console_problems(messages)
-    from PIL import Image
-
-    image = Image.open(shot).convert("RGB").resize((64, 36))
-    if is_blank(list(image.getdata())):
+    if shot_is_blank(shot):
         problems.append("la capture est vide : le jeu n'a rien dessiné")
+        print("Console du navigateur :", *messages[-30:], sep="\n  ")
     for problem in problems:
         print("PROBLÈME :", problem)
     print("Version web : " + ("OK." if not problems else f"{len(problems)} problème(s)."), f"Capture : {shot}")
