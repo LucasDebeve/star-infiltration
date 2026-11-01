@@ -1,4 +1,5 @@
 """Sprites du joueur et des gardes : dessin de dessus, orientation, postures, état d'alerte, animation de la marche."""
+
 import math
 
 import pygame

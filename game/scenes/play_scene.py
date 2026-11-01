@@ -1,4 +1,5 @@
 """Scène de jeu : charge une carte, orchestre joueur, gardes, objets, interactions, caméra et affichage."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -109,8 +110,7 @@ class PlayScene(Scene):
             "field_toggled": lambda field, **_: self._shake(SHAKE_FIELD, self._field_center(self.tilemap.fields[field])),
         }
         self._tip_handlers = {  # événements qui font comprendre une astuce (elle ne le sait que si elle est affichée)
-            name: (lambda event: lambda **_: self.tips.notify(event))(name)
-            for name in ("item_picked", "door_opened", "button_pressed", "terminal_hacked", "decoy_thrown", "mission_complete")
+            name: (lambda event: lambda **_: self.tips.notify(event))(name) for name in ("item_picked", "door_opened", "button_pressed", "terminal_hacked", "decoy_thrown", "mission_complete")
         }
         self._handlers = {
             "noise": self._on_noise,
@@ -165,11 +165,7 @@ class PlayScene(Scene):
             if exits
             else None
         )
-        self.pickups = [
-            Pickup(*s.center(ts), Item(kind, s.level))
-            for s in self.tilemap.spawns
-            if (kind := PICKUP_SPAWNS.get(s.kind))
-        ]
+        self.pickups = [Pickup(*s.center(ts), Item(kind, s.level)) for s in self.tilemap.spawns if (kind := PICKUP_SPAWNS.get(s.kind))]
         self.decoys: list[Decoy] = []
         self.field_buttons = [FieldButton(spec, ts) for spec in self.tilemap.buttons.values()]
         exit_tile = (exits[0].tx, exits[0].ty) if exits else None
@@ -229,15 +225,8 @@ class PlayScene(Scene):
     def _ambient_sources(self) -> list[AmbientSource]:
         """Ce qui bourdonne dans la carte : moteurs, lampes (éteintes sans courant), champs actifs, terminaux, consoles."""
         ts = self.tilemap.tile_size
-        sources = [
-            AmbientSource("engine", pygame.Vector2((p.x + p.w / 2) * ts, (p.y + p.h / 2) * ts))
-            for p in self.tilemap.props
-            if p.kind == "ship"
-        ]
-        sources += [
-            AmbientSource("lamp", lamp.position(ts), lambda i=i: self.power_on and i not in self.lights_out)
-            for i, lamp in enumerate(self.lighting.lamps)
-        ]
+        sources = [AmbientSource("engine", pygame.Vector2((p.x + p.w / 2) * ts, (p.y + p.h / 2) * ts)) for p in self.tilemap.props if p.kind == "ship"]
+        sources += [AmbientSource("lamp", lamp.position(ts), lambda i=i: self.power_on and i not in self.lights_out) for i, lamp in enumerate(self.lighting.lamps)]
         sources += [AmbientSource("field", pos) for pos in self._field_light_positions]
         sources += [AmbientSource("field", self._field_center(f), lambda f=f: f.active) for f in self.tilemap.fields.values()]
         sources += [AmbientSource("terminal", t.pos, lambda t=t: not t.hacked) for t in self.terminals]
@@ -491,9 +480,7 @@ class PlayScene(Scene):
             self._update_terminals(dt)
 
             collect_pickups(self.player.pos, self.inventory, self.pickups, self.game.events)
-            self.interaction.update(
-                dt, self.player.pos, self.tilemap, self.inventory, self.interactables, pressed=pressed, held=inp.interact
-            )
+            self.interaction.update(dt, self.player.pos, self.tilemap, self.inventory, self.interactables, pressed=pressed, held=inp.interact)
             for guard in self.guards:
                 guard.update(dt, self.tilemap, self.player)
             for camera in self.cameras:

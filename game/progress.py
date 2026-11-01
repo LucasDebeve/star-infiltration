@@ -3,6 +3,7 @@
 Logique pure et sans fenêtre. Le fichier de progression est tolérant comme celui des préférences : absent, illisible
 ou partiellement faux, on repart de ce qui est valide au lieu de planter.
 """
+
 from __future__ import annotations
 
 import json

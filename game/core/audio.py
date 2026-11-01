@@ -4,6 +4,7 @@ Si le périphérique audio est absent ou refuse de s'ouvrir, le jeu continue en 
 manquant n'est pas une erreur non plus : on l'ignore (et on le signale une seule fois dans les journaux).
 Les calculs de volume sont des fonctions pures, testées sans carte son.
 """
+
 from __future__ import annotations
 
 import logging
@@ -51,7 +52,7 @@ def channel_volumes(volume: float, pan: float = 0.0) -> tuple[float, float]:
 def music_levels(tension: float) -> tuple[float, float]:
     """Poids (calme, tendue) de chaque couche pour une tension de 0 à 1 (fondu enchaîné à puissance constante)."""
     tension = max(0.0, min(1.0, tension))
-    return (1.0 - tension) ** 0.5, tension ** 0.5
+    return (1.0 - tension) ** 0.5, tension**0.5
 
 
 class Audio:

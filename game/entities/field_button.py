@@ -1,4 +1,5 @@
 """Bouton de champs de force : chaque pression inverse l'état de tous les champs auxquels il est lié."""
+
 from __future__ import annotations
 
 import pygame

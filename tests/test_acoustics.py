@@ -1,4 +1,5 @@
 """Acoustique : occlusion filtrée (K3), réverbération par salle (K4), voix et radios des gardes (K5)."""
+
 import math
 import random
 from array import array
@@ -236,7 +237,7 @@ def test_no_line_repeats_until_all_have_been_heard():
     voices = bank(gap=0.0, cooldown=0.0)
     names = [voices.pick("chase") for _ in range(VOICE_LINES["chase"] * 3)]
     for start in range(0, len(names), VOICE_LINES["chase"]):
-        assert len(set(names[start:start + VOICE_LINES["chase"]])) == VOICE_LINES["chase"]
+        assert len(set(names[start : start + VOICE_LINES["chase"]])) == VOICE_LINES["chase"]
     assert all(a != b for a, b in zip(names, names[1:]))  # jamais deux fois de suite, même d'un sac à l'autre
 
 

@@ -4,6 +4,7 @@
 qui courent, étincelles pendant un piratage ou quand un champ de force bascule, fumée à la poupe des vaisseaux.
 Les vaisseaux ne fument que s'ils sont assez près du joueur : inutile d'animer ce que personne ne voit.
 """
+
 from __future__ import annotations
 
 import math
@@ -77,12 +78,7 @@ class Effects:
         self.dust_color = tilemap.theme.dust
         rng = self.particles.rng
         ts = tilemap.tile_size
-        self.nozzles = [
-            (pos, direction, Pulse(SMOKE_RATE, rng))
-            for prop in tilemap.props
-            if prop.kind == SHIP_KIND
-            for pos, direction in ship_nozzles(prop, ts)
-        ]
+        self.nozzles = [(pos, direction, Pulse(SMOKE_RATE, rng)) for prop in tilemap.props if prop.kind == SHIP_KIND for pos, direction in ship_nozzles(prop, ts)]
         self._sparks = Pulse(1.0, rng)
         self._chase: dict[int, float] = {}
         self.theme = tilemap.theme

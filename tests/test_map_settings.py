@@ -1,4 +1,5 @@
 """Réglages par carte (E1) : @lockdown, @waves, @detect, @stay, @ambient."""
+
 import pytest
 
 from game.core.input import InputState

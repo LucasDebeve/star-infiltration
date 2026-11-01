@@ -5,6 +5,7 @@ mélangé : aucune ne revient avant que toutes soient passées, et la première 
 l'ancien. Un délai global (`VOICE_GAP`) évite que deux gardes parlent en même temps, un délai par catégorie
 (`VOICE_CATEGORY_COOLDOWN`) que la même scène se répète. Pur : l'horloge avance par `tick(dt)`.
 """
+
 from __future__ import annotations
 
 import random

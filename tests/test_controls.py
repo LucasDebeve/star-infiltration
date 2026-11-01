@@ -1,4 +1,5 @@
 """Remappage des touches, manette, écran Commandes."""
+
 import json
 import os
 from pathlib import Path

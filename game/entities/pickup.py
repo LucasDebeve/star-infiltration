@@ -1,4 +1,5 @@
 """Objet posé au sol, ramassé en le touchant."""
+
 from __future__ import annotations
 
 import math

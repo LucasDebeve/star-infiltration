@@ -1,4 +1,5 @@
 """Thèmes visuels : directive @theme, tuiles dessinées par thème, lumière, poussière, missions livrées."""
+
 import pygame
 import pytest
 
@@ -129,8 +130,18 @@ def test_dust_takes_the_color_of_the_ground():
 def test_each_theme_is_used_by_a_shipped_mission():
     used = {m.id: Tilemap.from_file(m.map_path).theme.id for m in CAMPAIGN.missions}
     assert used == {
-        "training": "imperial", "outpost": "tatooine", "blackout": "tatooine", "endor": "endor",
-        "radar": "endor", "prison": "tatooine", "hangar": "imperial", "theft": "imperial", "uniform": "imperial", "hq": "imperial", "cruiser": "imperial", "destroyer": "imperial",
+        "training": "imperial",
+        "outpost": "tatooine",
+        "blackout": "tatooine",
+        "endor": "endor",
+        "radar": "endor",
+        "prison": "tatooine",
+        "hangar": "imperial",
+        "theft": "imperial",
+        "uniform": "imperial",
+        "hq": "imperial",
+        "cruiser": "imperial",
+        "destroyer": "imperial",
     }
     assert set(used.values()) == set(THEMES)
 

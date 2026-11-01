@@ -10,6 +10,7 @@ la valeur de la difficulté (ou du thème) telle quelle.
     @stay 20             secondes de présence d'un renfort
     @ambient 90,100,130  lumière ambiante (RVB), à la place de celle du thème
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, replace

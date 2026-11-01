@@ -78,12 +78,7 @@ def test_sandbox_is_valid_and_connected():
             continue
         seen.add((tx, ty))
         todo += [(tx + 1, ty), (tx - 1, ty), (tx, ty + 1), (tx, ty - 1)]
-    walkable = {
-        (x, y)
-        for y in range(tm.height)
-        for x in range(tm.width)
-        if tm.tile_at(x, y) in (FLOOR, DOOR, GATE)
-    }
+    walkable = {(x, y) for y in range(tm.height) for x in range(tm.width) if tm.tile_at(x, y) in (FLOOR, DOOR, GATE)}
     assert seen == walkable
     for spawn in tm.spawns:
         assert (spawn.tx, spawn.ty) in seen

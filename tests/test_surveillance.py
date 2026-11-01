@@ -1,4 +1,5 @@
 """Terminaux à menu, caméras de surveillance, lumière coupée depuis un terminal, et éclairage qui influence la détection."""
+
 import math
 
 import pygame
@@ -570,12 +571,7 @@ def test_standing_under_a_lamp_is_brighter_than_in_a_corner(cruiser):
     cruiser.player.pos.update(lamp.position(32))
     update(cruiser, 0.1)
     under = cruiser.player_light
-    corner = next(
-        tile_center(x, y)
-        for y in range(3, 47)
-        for x in range(3, 70)
-        if not cruiser.tilemap.is_solid(x, y) and all(tile_center(x, y).distance_to(l.position(32)) > LAMP_RADIUS for l in cruiser.lighting.lamps)
-    )
+    corner = next(tile_center(x, y) for y in range(3, 47) for x in range(3, 70) if not cruiser.tilemap.is_solid(x, y) and all(tile_center(x, y).distance_to(l.position(32)) > LAMP_RADIUS for l in cruiser.lighting.lamps))
     cruiser.player.pos.update(corner)
     update(cruiser, 0.1)
     assert cruiser.player_light < under and cruiser.player.light_factor < visibility_factor(under)

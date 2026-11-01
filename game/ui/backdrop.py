@@ -1,4 +1,5 @@
 """Arrière-plans des menus : champ d'étoiles animé (menu principal) ou capture floutée du jeu (pause)."""
+
 from __future__ import annotations
 
 import math
@@ -21,10 +22,7 @@ class Starfield:
         rng = random.Random(seed)  # fixe : le fond est identique à chaque lancement
         self.size = size
         self.ship = ship  # montrer le croiseur qui dérive (pas pour le générique, qui ne veut que des étoiles)
-        self.stars = [
-            [rng.uniform(0, size[0]), rng.uniform(0, size[1]), rng.uniform(4, 26), rng.choice((1, 1, 1, 2)), rng.uniform(0, math.tau)]
-            for _ in range(STAR_COUNT)
-        ]
+        self.stars = [[rng.uniform(0, size[0]), rng.uniform(0, size[1]), rng.uniform(4, 26), rng.choice((1, 1, 1, 2)), rng.uniform(0, math.tau)] for _ in range(STAR_COUNT)]
         self.time = 0.0
 
     def update(self, dt: float) -> None:
@@ -99,10 +97,7 @@ class SpaceLayer:
         rng = random.Random(seed)
         self.size = size
         # (x, y, profondeur, rayon, phase) dans un espace de la taille de l'écran, qui se répète.
-        self.stars = [
-            (rng.uniform(0, size[0]), rng.uniform(0, size[1]), rng.choice(SPACE_PARALLAX), rng.choice((1, 1, 1, 2)), rng.uniform(0, math.tau))
-            for _ in range(SPACE_STAR_COUNT)
-        ]
+        self.stars = [(rng.uniform(0, size[0]), rng.uniform(0, size[1]), rng.choice(SPACE_PARALLAX), rng.choice((1, 1, 1, 2)), rng.uniform(0, math.tau)) for _ in range(SPACE_STAR_COUNT)]
 
     def draw(self, surface: pygame.Surface, camera, time: float = 0.0) -> None:
         w, h = self.size

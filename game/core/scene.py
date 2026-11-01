@@ -1,4 +1,5 @@
 """Scènes et gestionnaire de scènes (pile)."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

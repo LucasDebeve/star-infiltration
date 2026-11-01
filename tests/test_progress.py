@@ -186,14 +186,20 @@ def test_unreadable_files_mean_a_fresh_start(tmp_path, content):
 
 def test_bad_records_are_dropped_and_good_ones_kept(tmp_path):
     path = tmp_path / "p.json"
-    path.write_text(json.dumps({"missions": {
-        "ok": {"best_score": 9000, "best_rank": "A", "best_time": 70.5, "completions": 3},
-        "négatif": {"best_score": -5, "best_rank": "A", "best_time": 10},
-        "texte": {"best_score": "beaucoup", "best_rank": "A", "best_time": 10},
-        "booléen": {"best_score": True, "best_rank": "A", "best_time": 10},
-        "pas un objet": 42,
-        "sans temps": {"best_score": 100, "best_rank": "D"},
-    }}))
+    path.write_text(
+        json.dumps(
+            {
+                "missions": {
+                    "ok": {"best_score": 9000, "best_rank": "A", "best_time": 70.5, "completions": 3},
+                    "négatif": {"best_score": -5, "best_rank": "A", "best_time": 10},
+                    "texte": {"best_score": "beaucoup", "best_rank": "A", "best_time": 10},
+                    "booléen": {"best_score": True, "best_rank": "A", "best_time": 10},
+                    "pas un objet": 42,
+                    "sans temps": {"best_score": 100, "best_rank": "D"},
+                }
+            }
+        )
+    )
     progress = Progress.load(path)
     assert list(progress.records) == ["ok"]
     assert progress.record_of("ok") == MissionRecord(9000, "A", 70.5, 3)

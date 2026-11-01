@@ -9,6 +9,7 @@ Deux notions d'obstacle :
 Un déplacement (dégagement d'un garde, lancer d'un leurre) utilise le solide ; la perception, l'opaque ; la lumière
 (`light=True`) l'opaque sauf les vaisseaux, qu'elle survole : sans cela chaque vaisseau projetterait l'ombre d'un rectangle plein.
 """
+
 from __future__ import annotations
 
 import math
@@ -86,8 +87,4 @@ def count_solid_tiles(tilemap, a, b) -> int:
     a, b = pygame.Vector2(a), pygame.Vector2(b)
     delta = b - a
     dist = delta.length()
-    return sum(
-        1
-        for tx, ty, _ in traverse(tilemap.tile_size, a.x, a.y, delta.x, delta.y, dist)
-        if tilemap.is_opaque(tx, ty)
-    )
+    return sum(1 for tx, ty, _ in traverse(tilemap.tile_size, a.x, a.y, delta.x, delta.y, dist) if tilemap.is_opaque(tx, ty))

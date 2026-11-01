@@ -1,4 +1,5 @@
 """Caméra expressive : avance dans le sens du déplacement, inclinaison vers le curseur, zoom, secousses."""
+
 import math
 
 import pygame
@@ -184,6 +185,7 @@ def test_small_shocks_are_discreet():
     small, big = centered(), centered()
     small.add_trauma(0.2)
     big.add_trauma(1.0)
+
     def peak(c):
         return max((c.update(V(2000, 2000), 1 / 120), c.shake.length())[1] for _ in range(30))
 

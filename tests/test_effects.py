@@ -1,4 +1,5 @@
 """Effets visuels : particules (poussière, étincelles, fumée), et ce qui les déclenche dans la scène."""
+
 import pygame
 import pytest
 

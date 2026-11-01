@@ -1,5 +1,6 @@
 """Console de la salle de contrôle : maintenir E quelques secondes pour couper l'alimentation (objectif « couper l'alimentation »)
 ou pour désactiver les rayons tracteurs et les attaches des vaisseaux (objectif « voler un vaisseau »)."""
+
 from __future__ import annotations
 
 import math

@@ -92,9 +92,7 @@ def test_play_scene_smoke(game, monkeypatch):
     scene.player.pos.update(3.5 * 32, 10.5 * 32)
     scene.camera.snap_to(scene.player.pos)
     start = scene.player.pos.copy()
-    monkeypatch.setattr(
-        play_scene, "read_input", lambda: InputState(move=pygame.Vector2(1, 0), run=True)
-    )
+    monkeypatch.setattr(play_scene, "read_input", lambda: InputState(move=pygame.Vector2(1, 0), run=True))
     for _ in range(240):
         game.step(1 / 60)
     assert scene.player.pos.x > start.x
@@ -185,9 +183,7 @@ def test_footstep_noise_makes_a_nearby_guard_investigate(scene, monkeypatch):
     place(scene, guard, (6, 27))
     scene.player.pos.update(4.5 * 32, 27.5 * 32)
     guard.angle = 0.0  # regarde vers l'est, le joueur est derrière lui (à l'ouest) : il ne peut que l'entendre
-    monkeypatch.setattr(
-        play_scene, "read_input", lambda: InputState(move=pygame.Vector2(0, 1), run=True)
-    )
+    monkeypatch.setattr(play_scene, "read_input", lambda: InputState(move=pygame.Vector2(0, 1), run=True))
     scene.update(1 / 60)
     assert guard.state is GuardState.INVESTIGATE
     assert scene.threat is GuardState.INVESTIGATE
@@ -199,9 +195,7 @@ def test_crouching_player_is_inaudible(scene, monkeypatch):
     place(scene, guard, (6, 27))
     scene.player.pos.update(4.5 * 32, 27.5 * 32)
     guard.angle = 0.0
-    monkeypatch.setattr(
-        play_scene, "read_input", lambda: InputState(move=pygame.Vector2(0, 1), crouch=True)
-    )
+    monkeypatch.setattr(play_scene, "read_input", lambda: InputState(move=pygame.Vector2(0, 1), crouch=True))
     for _ in range(30):
         scene.update(1 / 60)
     assert guard.state is GuardState.PATROL
@@ -388,9 +382,7 @@ def test_mission_complete_then_restart_resets_everything(scene):
     scene.guards.clear()
     scene.inventory.add(Item(ItemKind.DATA))
     scene.inventory.add(Item(ItemKind.KEYCARD, 1))
-    next(d for d in scene.doors if d.tiles[0] == (22, 27)).interact(
-        InteractionContext(scene.tilemap, scene.inventory, scene.game.events)
-    )
+    next(d for d in scene.doors if d.tiles[0] == (22, 27)).interact(InteractionContext(scene.tilemap, scene.inventory, scene.game.events))
     teleport(scene, (3, 31))
     press_e(scene)
     assert scene.won and not scene.caught and scene.objective == ""
@@ -619,7 +611,6 @@ def test_full_frame_during_alert_with_everything_on_screen(scene):
 
 
 def test_reinforcements_withdraw_after_their_stay(scene):
-
     start_alert(scene)
     for _ in range(round((REINFORCE_FIRST_DELAY + 0.5) * 60)):
         scene.update(1 / 60)

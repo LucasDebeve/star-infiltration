@@ -246,10 +246,10 @@ def test_small_hulls_are_fighters_and_big_ones_shuttles():
 
 def test_the_nose_points_where_it_should():
     """Verrière (bleue) du côté du nez : en haut pour N, en bas pour S, à droite pour E, à gauche pour O."""
+
     def glass_center(facing):
         sprite = prop_art.ship_sprite(5, 4, facing, TS)
-        pts = [(x, y) for x in range(sprite.get_width()) for y in range(sprite.get_height())
-               if sprite.get_at((x, y))[2] > 180 and sprite.get_at((x, y))[0] < 110 and sprite.get_at((x, y)).a == 255]
+        pts = [(x, y) for x in range(sprite.get_width()) for y in range(sprite.get_height()) if sprite.get_at((x, y))[2] > 180 and sprite.get_at((x, y))[0] < 110 and sprite.get_at((x, y)).a == 255]
         return sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts), sprite.get_size()
 
     x, y, (w, h) = glass_center("N")

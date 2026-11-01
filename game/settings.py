@@ -1,4 +1,5 @@
 """Constantes globales : chemins, affichage, touches, couleurs, réglages du joueur."""
+
 from __future__ import annotations
 
 import math

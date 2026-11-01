@@ -1,4 +1,5 @@
 """Astuces contextuelles de l'entraînement, et disparition de l'aide permanente de l'écran de jeu."""
+
 import pygame
 import pytest
 

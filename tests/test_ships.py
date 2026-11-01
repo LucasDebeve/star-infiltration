@@ -1,4 +1,5 @@
 """Vaisseaux détaillés : ombre portée, détails du dessin, points d'attache (tuyères, feux), animation des moteurs et des feux."""
+
 import pygame
 import pytest
 

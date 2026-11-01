@@ -5,6 +5,7 @@ commandes au bon moment, à la place d'un pense-bête permanent à l'écran. Log
 montrer et quand elle est comprise (action faite, temps écoulé) ; `format_tip` y met les touches réellement utilisées
 (clavier remappé, ou boutons de la manette).
 """
+
 from __future__ import annotations
 
 import math
@@ -59,8 +60,13 @@ def format_tip(text: str) -> str:
     label = bindings.label
     aim = "le joystick droit" if bindings.device == bindings.PAD else "la souris"
     return text.format(
-        move=label("move"), run=label("run"), crouch=label("crouch"), interact=label("interact"),
-        throw=label("throw"), pause=label("pause"), aim=aim,
+        move=label("move"),
+        run=label("run"),
+        crouch=label("crouch"),
+        interact=label("interact"),
+        throw=label("throw"),
+        pause=label("pause"),
+        aim=aim,
     )
 
 
@@ -117,11 +123,7 @@ class TipTracker:
             state.shown += dt
             state.moved += step
             state.crouched += dt if stance_is_crouch else 0.0
-            if (
-                (tip.duration is not None and state.shown >= tip.duration)
-                or (tip.done_distance is not None and state.moved >= tip.done_distance)
-                or (tip.done_crouch is not None and state.crouched >= tip.done_crouch)
-            ):
+            if (tip.duration is not None and state.shown >= tip.duration) or (tip.done_distance is not None and state.moved >= tip.done_distance) or (tip.done_crouch is not None and state.crouched >= tip.done_crouch):
                 state.done = True
                 self.active = None
         target = 1.0 if self.active is not None else 0.0

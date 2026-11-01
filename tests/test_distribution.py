@@ -1,4 +1,5 @@
 """Distribution (N1 à N3, L3, L4) : icône et métadonnées, signature, installateurs, linter, version web et commandes tactiles."""
+
 import importlib.util
 import struct
 import sys
@@ -59,7 +60,7 @@ def test_the_ico_lists_png_images_of_the_right_sizes(icons):
     for i in range(count):
         width, _, _, _, _, bits, length, offset = struct.unpack_from("<BBBBHHII", data, 6 + 16 * i)
         sizes.append(width or 256)
-        assert data[offset:offset + 8] == b"\x89PNG\r\n\x1a\n" and offset + length <= len(data)
+        assert data[offset : offset + 8] == b"\x89PNG\r\n\x1a\n" and offset + length <= len(data)
     assert sizes == sorted(icons.ICO_SIZES)
 
 
@@ -68,8 +69,8 @@ def test_the_icns_has_the_expected_elements(icons):
     assert data[:4] == b"icns" and struct.unpack(">I", data[4:8])[0] == len(data)
     kinds, position = [], 8
     while position < len(data):
-        kind, length = data[position:position + 4], struct.unpack(">I", data[position + 4:position + 8])[0]
-        assert data[position + 8:position + 16] == b"\x89PNG\r\n\x1a\n"
+        kind, length = data[position : position + 4], struct.unpack(">I", data[position + 4 : position + 8])[0]
+        assert data[position + 8 : position + 16] == b"\x89PNG\r\n\x1a\n"
         kinds.append(kind)
         position += length
     assert kinds == [icons.ICNS_TYPES[s] for s in sorted(icons.ICNS_TYPES)] and position == len(data)
@@ -295,7 +296,7 @@ def test_buttons_fit_on_screen_without_overlapping():
     for name, (position, radius) in spots.items():
         assert radius == TOUCH_BUTTON_RADIUS and radius <= position.x <= SIZE[0] - radius and radius <= position.y <= SIZE[1] - radius
     centres = [p for p, _ in spots.values()]
-    assert all(a.distance_to(b) > 2 * TOUCH_BUTTON_RADIUS for i, a in enumerate(centres) for b in centres[i + 1:])
+    assert all(a.distance_to(b) > 2 * TOUCH_BUTTON_RADIUS for i, a in enumerate(centres) for b in centres[i + 1 :])
 
 
 def test_touch_controls_stay_hidden_until_a_finger_lands(pad):

@@ -1,4 +1,5 @@
 """Uniforme impérial : casier à fouiller (objectif), enfiler l'uniforme, porte du personnel et détection en déguisement."""
+
 import pygame
 import pytest
 

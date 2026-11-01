@@ -1,4 +1,5 @@
 """Chemins des cartes utilisées par les tests."""
+
 from pathlib import Path
 
 # Banc d'essai : une grande carte stable (couloir central, plusieurs salles, 8 gardes, portes à badge, un bouton),

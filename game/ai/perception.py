@@ -2,6 +2,7 @@
 
 Fonctions pures : tout est passé en paramètres, rien n'est lu dans `settings` à l'intérieur.
 """
+
 from __future__ import annotations
 
 import math

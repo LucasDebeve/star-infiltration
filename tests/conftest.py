@@ -1,4 +1,5 @@
 """Les tests tournent sans fenêtre ni son (SDL « dummy »)."""
+
 import os
 import tempfile
 from pathlib import Path

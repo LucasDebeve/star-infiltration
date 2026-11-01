@@ -1,4 +1,5 @@
 """Entité de base : position (centre), boîte de collision, déplacement avec collisions."""
+
 from __future__ import annotations
 
 import pygame

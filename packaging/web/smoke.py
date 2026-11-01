@@ -5,6 +5,7 @@ navigateur exige un geste de l'utilisateur avant de lancer le son), laisse le je
 montre une erreur Python (`Traceback`, `Error`) ou si la page reste vide. Il enregistre une capture. pygbag charge son moteur depuis
 Internet : à lancer avec une connexion. Prérequis : `pip install playwright && playwright install chromium`.
 """
+
 from __future__ import annotations
 
 import functools

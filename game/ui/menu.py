@@ -3,6 +3,7 @@
 Éléments : `Button` (action), `Slider` (valeur bornée), `Toggle` (oui / non), `Choice` (liste de valeurs).
 `Menu` gère la sélection ; la scène lui transmet les touches ou la souris, et un callback joue les sons.
 """
+
 from __future__ import annotations
 
 from typing import Any, Callable

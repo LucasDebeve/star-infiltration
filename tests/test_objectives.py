@@ -1,4 +1,5 @@
 """Objectifs de mission : vol de plans, coupure de l'alimentation, et le terrain préparé pour la libération de prisonnier."""
+
 import json
 
 import pygame
@@ -307,7 +308,12 @@ def test_a_player_cannot_leave_before_cutting_the_power(game, monkeypatch):
 # --- La campagne -----------------------------------------------------------------------------------------
 def write_campaign(tmp_path, objective):
     entry = {
-        "id": "x", "title": "X", "map": "blackout.txt", "par_time": 60, "episode": "ÉPISODE I", "summary": "Résumé.",
+        "id": "x",
+        "title": "X",
+        "map": "blackout.txt",
+        "par_time": 60,
+        "episode": "ÉPISODE I",
+        "summary": "Résumé.",
         "intro": ["Un paragraphe."],
     }
     if objective is not None:

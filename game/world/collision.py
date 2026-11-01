@@ -4,6 +4,7 @@ Principe : on déplace la boîte sur l'axe X puis on corrige, puis sur l'axe Y p
 Séparer les axes permet de glisser le long d'un mur au lieu de s'y coller.
 Fonctions pures (aucune dépendance à pygame) : faciles à tester.
 """
+
 from __future__ import annotations
 
 import math

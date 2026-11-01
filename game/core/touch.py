@@ -6,6 +6,7 @@ leurre, uniforme, pause) sont **traduits en événements clavier** ; les actions
 mouvement sont lus à chaque image (`move`, `run`...). Les menus se touchent comme à la souris (SDL traduit le doigt en clic).
 La disposition et la lecture sont pures : les tests envoient de faux événements de doigt.
 """
+
 from __future__ import annotations
 
 import pygame
@@ -38,10 +39,7 @@ def layout(size: tuple[int, int]) -> dict[str, tuple[pygame.Vector2, int]]:
     """Centre et rayon de chaque bouton, en pixels, pour un écran de `size` : en colonnes serrées dans le coin bas droit."""
     width, height = size
     step = 2 * TOUCH_BUTTON_RADIUS + TOUCH_MARGIN
-    return {
-        name: (pygame.Vector2(width - TOUCH_MARGIN - TOUCH_BUTTON_RADIUS - col * step, height - TOUCH_MARGIN - TOUCH_BUTTON_RADIUS - row * step), TOUCH_BUTTON_RADIUS)
-        for name, (_, col, row, _) in BUTTONS.items()
-    }
+    return {name: (pygame.Vector2(width - TOUCH_MARGIN - TOUCH_BUTTON_RADIUS - col * step, height - TOUCH_MARGIN - TOUCH_BUTTON_RADIUS - row * step), TOUCH_BUTTON_RADIUS) for name, (_, col, row, _) in BUTTONS.items()}
 
 
 class TouchControls:

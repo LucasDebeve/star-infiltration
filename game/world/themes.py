@@ -3,6 +3,7 @@
 Un thème est choisi par la directive `@theme nom` de la carte (le vaisseau impérial par défaut). Données pures :
 le dessin des tuiles est dans `tile_art.py`, la lumière lit `ambient` et `lamp_tints`.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

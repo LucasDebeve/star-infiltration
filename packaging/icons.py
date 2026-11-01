@@ -3,6 +3,7 @@
 `python packaging/icons.py` régénère `packaging/icons/` et `assets/icon.png` (l'icône de la fenêtre). Les écrivains de formats sont
 purs (octets en entrée, octets en sortie) : ICO et ICNS n'embarquent que des PNG, sans dépendance à Pillow.
 """
+
 from __future__ import annotations
 
 import math

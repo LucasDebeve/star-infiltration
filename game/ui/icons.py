@@ -1,4 +1,5 @@
 """Icônes d'objets dessinées à la volée (pas d'image à charger) et halo lumineux."""
+
 from __future__ import annotations
 
 from functools import lru_cache
@@ -64,8 +65,16 @@ def draw_item_icon(surface: pygame.Surface, item: Item, center: tuple[int, int],
     elif item.kind is ItemKind.UNIFORM:  # tunique pliée : épaules, col, insigne
         body = pygame.Rect(0, 0, round(size * 0.78), round(size * 0.74))
         body.center = (cx, cy + 1)
-        shoulders = [(body.x - 3, body.y + 5), (body.x + 4, body.y), (body.right - 4, body.y), (body.right + 3, body.y + 5), (body.right - 1, body.y + 9),
-                     (body.right - 1, body.bottom), (body.x + 1, body.bottom), (body.x + 1, body.y + 9)]
+        shoulders = [
+            (body.x - 3, body.y + 5),
+            (body.x + 4, body.y),
+            (body.right - 4, body.y),
+            (body.right + 3, body.y + 5),
+            (body.right - 1, body.y + 9),
+            (body.right - 1, body.bottom),
+            (body.x + 1, body.bottom),
+            (body.x + 1, body.y + 9),
+        ]
         pygame.draw.polygon(surface, color, shoulders)
         pygame.draw.polygon(surface, outline, shoulders, 1)
         pygame.draw.polygon(surface, _lighter(color), [(cx - 3, body.y), (cx + 3, body.y), (cx, body.y + 5)])  # col

@@ -5,6 +5,7 @@ Une particule vit `life` secondes, grandit de `size0` à `size1` et s'estompe. D
     lumineuses (étincelles) : ajoutées après l'éclairage (`BLEND_RGB_ADD`), donc elles brillent dans l'obscurité.
 Le nombre de particules est plafonné (`PARTICLE_LIMIT`) : au-delà, les nouvelles sont ignorées.
 """
+
 from __future__ import annotations
 
 import math

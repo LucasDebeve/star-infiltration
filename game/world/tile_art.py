@@ -3,6 +3,7 @@
 Les variantes sont choisies par un hachage de la position de la tuile : la même carte est toujours dessinée pareil,
 et le décor n'a pas l'air d'un carrelage. Le thème impérial garde son damier d'origine.
 """
+
 from __future__ import annotations
 
 import random

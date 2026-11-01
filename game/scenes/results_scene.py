@@ -1,4 +1,5 @@
 """Écran de fin de mission : temps, alertes déclenchées, leurres utilisés, score et rang obtenu."""
+
 from __future__ import annotations
 
 import pygame

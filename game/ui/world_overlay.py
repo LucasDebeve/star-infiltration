@@ -1,4 +1,5 @@
 """Calque d'indicateurs dans le monde : cônes de vision et bulles d'alerte des gardes."""
+
 from __future__ import annotations
 
 import math
@@ -56,10 +57,7 @@ class WorldOverlay:
         heat = 1.0 if security_camera.alarmed else security_camera.awareness
         r, g, b = lerp_color(COLORS["camera_cone"], COLORS["cone_chase"], heat)
         eye = camera.world_to_screen(security_camera.pos)
-        rim = [
-            camera.world_to_screen(p)
-            for p in vision_points(tilemap, security_camera.pos, security_camera.angle, CAMERA_FOV, CAMERA_RANGE, GUARD_VISION_RAYS)
-        ]
+        rim = [camera.world_to_screen(p) for p in vision_points(tilemap, security_camera.pos, security_camera.angle, CAMERA_FOV, CAMERA_RANGE, GUARD_VISION_RAYS)]
         for scale, alpha in CONE_LAYERS:
             shape = [eye] + [(eye[0] + (x - eye[0]) * scale, eye[1] + (y - eye[1]) * scale) for x, y in rim]
             pygame.draw.polygon(self._layer, (r, g, b, alpha), shape)
@@ -70,10 +68,7 @@ class WorldOverlay:
         r, g, b = lerp_color(COLORS[f"cone_{guard.state.value}"], COLORS["cone_chase"], heat)
 
         eye = camera.world_to_screen(guard.pos)
-        rim = [
-            camera.world_to_screen(p)
-            for p in vision_points(tilemap, guard.pos, guard.angle, GUARD_FOV, GUARD_VISION_RANGE, GUARD_VISION_RAYS)
-        ]
+        rim = [camera.world_to_screen(p) for p in vision_points(tilemap, guard.pos, guard.angle, GUARD_FOV, GUARD_VISION_RANGE, GUARD_VISION_RAYS)]
         for scale, alpha in CONE_LAYERS:
             shape = [eye] + [(eye[0] + (x - eye[0]) * scale, eye[1] + (y - eye[1]) * scale) for x, y in rim]
             pygame.draw.polygon(self._layer, (r, g, b, alpha), shape)

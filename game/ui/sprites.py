@@ -5,6 +5,7 @@ ombre, jambes et bras qui se balancent avec la marche, sac, torse, tête casqué
 course : penché en avant), et le liseré du garde suit son état d'alerte. Rien ici ne dépend de l'état du jeu : on passe la
 position, la direction, la phase du pas et l'état, et l'on obtient une image, donc c'est testable sur une simple surface.
 """
+
 from __future__ import annotations
 
 import math
@@ -35,9 +36,7 @@ class Frame:
         return [self.point(u, v) for u, v in pts]
 
     def ellipse(self, u0: float, v0: float, ru: float, rv: float) -> list[tuple[float, float]]:
-        return self.points(
-            (u0 + ru * math.cos(t), v0 + rv * math.sin(t)) for t in (math.tau * i / ELLIPSE_POINTS for i in range(ELLIPSE_POINTS))
-        )
+        return self.points((u0 + ru * math.cos(t), v0 + rv * math.sin(t)) for t in (math.tau * i / ELLIPSE_POINTS for i in range(ELLIPSE_POINTS)))
 
 
 def _shape(surface, color, points, outline: bool = True) -> None:
@@ -70,9 +69,7 @@ def swing(phase: float, amplitude: float, stride: float, side: int) -> float:
 
 
 # --- L'agent rebelle ------------------------------------------------------------------------------------------------
-def draw_player(
-    surface: pygame.Surface, center, facing, stance: str, phase: float = 0.0, stride: float = 0.0, time: float = 0.0, disguised: bool = False
-) -> None:
+def draw_player(surface: pygame.Surface, center, facing, stance: str, phase: float = 0.0, stride: float = 0.0, time: float = 0.0, disguised: bool = False) -> None:
     """`stance` : "crouch", "walk" ou "run". `phase` : cycle de marche (rad). `stride` : 0 à l'arrêt, 1 en marche.
     `disguised` : en uniforme impérial (tunique grise, calot sombre, plus de sac ni de liseré rebelle)."""
     scale = SPRITE_SCALE[stance]

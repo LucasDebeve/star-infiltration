@@ -1,4 +1,5 @@
 """Joueur virtuel pour les tests : suit des chemins A*, ouvre les portes dont il a le badge, appuie sur les boutons."""
+
 import pygame
 
 from game.core.input import InputState
@@ -14,9 +15,7 @@ class Runner:
     def __init__(self, game, scene, monkeypatch) -> None:
         self.game, self.scene, self.tm = game, scene, scene.tilemap
         self.control = {"move": pygame.Vector2(), "interact": False}
-        monkeypatch.setattr(
-            play_scene, "read_input", lambda: InputState(move=self.control["move"], run=True, interact=self.control["interact"])
-        )
+        monkeypatch.setattr(play_scene, "read_input", lambda: InputState(move=self.control["move"], run=True, interact=self.control["interact"]))
 
     @property
     def tile(self):
@@ -95,12 +94,7 @@ class Runner:
                 prompt = door.prompt(self.scene.inventory)  # ce que le joueur verrait : le badge, ou l'uniforme porté, ouvre la porte
                 if door.is_open or prompt is None or not prompt.enabled:
                     continue
-                beside = [
-                    (x + dx, y + dy)
-                    for x, y in door.tiles
-                    for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))
-                    if not self.tm.is_solid(x + dx, y + dy) and find_path(self.tm, self.tile, (x + dx, y + dy))
-                ]
+                beside = [(x + dx, y + dy) for x, y in door.tiles for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)) if not self.tm.is_solid(x + dx, y + dy) and find_path(self.tm, self.tile, (x + dx, y + dy))]
                 if beside:
                     self.walk(beside[0])
                     door.interact(InteractionContext(self.tm, self.scene.inventory, self.game.events))

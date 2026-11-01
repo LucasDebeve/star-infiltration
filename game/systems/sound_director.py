@@ -10,6 +10,7 @@ taille de la salle où il retentit ; les pas du joueur résonnent dans sa propre
 Voix : les gardes lancent une réplique quand ils soupçonnent, repèrent ou perdent le joueur, et la radio crachote à l'alerte
 (`VoiceBank` choisit la variante sans répéter).
 """
+
 from __future__ import annotations
 
 import random

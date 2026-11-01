@@ -27,6 +27,7 @@ Les erreurs de carte (en français) donnent le numéro de ligne du fichier.
 
 Plus tard, un chargeur Tiled (.tmx) pourra produire la même classe `Tilemap`.
 """
+
 from __future__ import annotations
 
 import logging
@@ -454,11 +455,7 @@ class Tilemap:
     def update_fields(self, occupants=()) -> list[Field]:
         """Active les champs en attente dont la zone est libre. Renvoie ceux qui viennent de le devenir."""
         boxes = list(occupants)
-        settled = [
-            f
-            for f in self.fields.values()
-            if f.pending and not any(box_overlaps_tiles(box, f.tiles, self.tile_size) for box in boxes)
-        ]
+        settled = [f for f in self.fields.values() if f.pending and not any(box_overlaps_tiles(box, f.tiles, self.tile_size) for box in boxes)]
         for f in settled:
             f.active = True
         if settled:
@@ -489,10 +486,7 @@ class Tilemap:
             for x in range(self.width):
                 if self.tiles[y][x] != DOOR or (x, y) in seen:
                     continue
-                tiles = [
-                    t for t in self._connected_doors((x, y))
-                    if self.door_level(*t) == self.door_level(x, y) and (t in self.uniform_doors) == ((x, y) in self.uniform_doors)
-                ]
+                tiles = [t for t in self._connected_doors((x, y)) if self.door_level(*t) == self.door_level(x, y) and (t in self.uniform_doors) == ((x, y) in self.uniform_doors)]
                 seen.update(tiles)
                 groups.append((sorted(tiles), self.door_level(x, y)))
         return groups
@@ -663,9 +657,7 @@ class Tilemap:
 
     def _wall_sides(self, tx: int, ty: int) -> tuple[bool, bool, bool, bool]:
         """(gauche, droite, haut, bas) : vrai si un mur touche la tuile de ce côté."""
-        return tuple(
-            self.tile_at(tx + dx, ty + dy) == WALL for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1))
-        )
+        return tuple(self.tile_at(tx + dx, ty + dy) == WALL for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)))
 
     @staticmethod
     def _draw_open_door(surface: pygame.Surface, rect: pygame.Rect, walls: tuple[bool, bool, bool, bool]) -> None:

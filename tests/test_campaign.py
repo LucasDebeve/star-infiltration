@@ -39,8 +39,18 @@ def test_the_shipped_campaign_loads_with_its_missions_in_order():
     c = load_campaign()
     assert [m.id for m in c.missions] == ["training", "outpost", "blackout", "endor", "uniform", "radar", "prison", "hangar", "theft", "hq", "cruiser", "destroyer"]
     assert [m.title for m in c.missions] == [
-        "Entraînement", "Avant-poste de Tatooine", "Coupure de courant", "Le bunker d'Endor",
-        "Le vestiaire impérial", "Le poste radar d'Endor", "Le centre de détention", "Le hangar de la flotte", "Vol de la navette", "Le quartier général", "Le croiseur impérial", "Le Destroyer",
+        "Entraînement",
+        "Avant-poste de Tatooine",
+        "Coupure de courant",
+        "Le bunker d'Endor",
+        "Le vestiaire impérial",
+        "Le poste radar d'Endor",
+        "Le centre de détention",
+        "Le hangar de la flotte",
+        "Vol de la navette",
+        "Le quartier général",
+        "Le croiseur impérial",
+        "Le Destroyer",
     ]
     assert [m.episode for m in c.missions] == ["ÉPISODE I", "ÉPISODE II", "ÉPISODE III", "ÉPISODE IV", "ÉPISODE V", "ÉPISODE VI", "ÉPISODE VII", "ÉPISODE VIII", "ÉPISODE IX", "ÉPISODE X", "ÉPISODE XI", "ÉPISODE XII"]
     assert [m.objective for m in c.missions] == ["steal_plans", "steal_plans", "cut_power", "steal_plans", "steal_uniform", "cut_power", "free_prisoner", "steal_plans", "steal_ship", "steal_plans", "steal_plans", "cut_power"]

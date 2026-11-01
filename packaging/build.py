@@ -13,6 +13,7 @@ Signature (macOS, Windows) : automatique quand les variables d'environnement de 
 Les résultats sont déposés dans `dist/`. Les fonctions pures (noms, liste des fichiers) sont testées ; les commandes extérieures
 (PyInstaller, pygbag) ne sont lancées que par `main`.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -148,8 +149,7 @@ def run_pyinstaller(root: Path = ROOT) -> Path:
     """Construit le dossier `StarInfiltration` (et le `.app` sous macOS) ; renvoie le dossier `dist` de PyInstaller."""
     work = root / "build" / "pyinstaller"
     run_command(
-        [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--distpath", str(work / "dist"), "--workpath", str(work / "work"),
-         str(root / "packaging" / "star_infiltration.spec")],
+        [sys.executable, "-m", "PyInstaller", "--noconfirm", "--clean", "--distpath", str(work / "dist"), "--workpath", str(work / "work"), str(root / "packaging" / "star_infiltration.spec")],
         cwd=root,
     )
     return work / "dist"
@@ -283,8 +283,7 @@ def build_web(out_dir: Path, root: Path = ROOT, full: bool = False, strict: bool
     if not converted and strict:
         raise SystemExit("ffmpeg est introuvable : la version web exige des sons .ogg (--strict). Installez ffmpeg.")
     if not converted:
-        print("ATTENTION : ffmpeg est introuvable, les sons restent en .wav (pygbag est forcé de passer outre) : "
-              "installez ffmpeg pour une version web dont le son fonctionne dans tous les navigateurs.")
+        print("ATTENTION : ffmpeg est introuvable, les sons restent en .wav (pygbag est forcé de passer outre) : installez ffmpeg pour une version web dont le son fonctionne dans tous les navigateurs.")
         command.insert(-1, "--disable-sound-format-error")
     subprocess.run(command, check=True, cwd=root)
     built = stage / "build" / "web"
@@ -300,8 +299,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--full", action="store_true", help="version web avec tous les sons, même les plus gros")
     args = parser.parse_args(argv)
     builders = {
-        "zip": lambda: build_zip(args.out), "exe": lambda: build_exe(args.out), "web": lambda: build_web(args.out, full=args.full, strict=args.strict),
-        "dmg": lambda: build_dmg(args.out), "installer": lambda: build_installer(args.out), "appimage": lambda: build_appimage(args.out),
+        "zip": lambda: build_zip(args.out),
+        "exe": lambda: build_exe(args.out),
+        "web": lambda: build_web(args.out, full=args.full, strict=args.strict),
+        "dmg": lambda: build_dmg(args.out),
+        "installer": lambda: build_installer(args.out),
+        "appimage": lambda: build_appimage(args.out),
     }
     for target in ("zip", "exe", "web") if args.target == "all" else (args.target,):
         print(f"== {target} ==")

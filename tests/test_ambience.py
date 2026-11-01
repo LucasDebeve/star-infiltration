@@ -1,4 +1,5 @@
 """Ambiances sonores localisées : mixage par genre, lissage, murs, courant, et sons ponctuels des boutons et champs."""
+
 import wave
 
 import pygame

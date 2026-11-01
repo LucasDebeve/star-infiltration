@@ -8,6 +8,7 @@ que les murs laissent éclairer. La carte est ensuite agrandie (ce qui adoucit l
 Optimisations : les lampes fixes ont leur sprite d'ombre mis en cache (invalidé quand une porte s'ouvre),
 décliné en paliers d'intensité pour le scintillement ; seules les lumières proches de l'écran sont dessinées.
 """
+
 from __future__ import annotations
 
 import math
@@ -100,11 +101,7 @@ class Lighting:
 
     def light_sources(self, tilemap) -> list[tuple]:
         """(position, rayon, couleur, intensité) des lampes de plafond allumées, tel que `exposure.light_at` les lit."""
-        return [
-            (lamp.position(tilemap.tile_size), LAMP_RADIUS, lamp.color, level)
-            for i, lamp in enumerate(self.lamps)
-            if (level := self.lamp_level(i)) > 0.01
-        ]
+        return [(lamp.position(tilemap.tile_size), LAMP_RADIUS, lamp.color, level) for i, lamp in enumerate(self.lamps) if (level := self.lamp_level(i)) > 0.01]
 
     def base_light(self) -> float:
         """Clarté ambiante (0..1) : celle du thème, qui tombe au noir complet sans courant."""

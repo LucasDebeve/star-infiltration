@@ -1,4 +1,5 @@
 """Réglages : volumes, éclairage, plein écran, difficulté. Enregistrés dès qu'on les change."""
+
 from __future__ import annotations
 
 import pygame
@@ -63,8 +64,7 @@ class SettingsScene(MenuScene):
     def draw_extra(self, surface: pygame.Surface) -> None:
         difficulty = get_difficulty(self.game.prefs.difficulty)
         lines = (
-            f"{difficulty.label} : détection des gardes ×{difficulty.detect:g}, verrouillage en {difficulty.lockdown_time:.0f} s, "
-            f"{difficulty.waves} vague(s) de renforts.",
+            f"{difficulty.label} : détection des gardes ×{difficulty.detect:g}, verrouillage en {difficulty.lockdown_time:.0f} s, {difficulty.waves} vague(s) de renforts.",
             "La difficulté s'applique à la prochaine mission.     Haut / Bas : choisir     Gauche / Droite : régler     Échap : retour",
         )
         y = surface.get_height() - 70

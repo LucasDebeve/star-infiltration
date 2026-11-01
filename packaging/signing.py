@@ -9,6 +9,7 @@ macOS : `CODESIGN_IDENTITY` (« Developer ID Application: Nom (ÉQUIPE) ») sign
 Windows : `WINDOWS_CERT_FILE` (un `.pfx`) et `WINDOWS_CERT_PASSWORD` signent l'exécutable et l'installateur avec `signtool`
 (horodatage `WINDOWS_TIMESTAMP_URL`, DigiCert par défaut).
 """
+
 from __future__ import annotations
 
 TIMESTAMP_URL = "http://timestamp.digicert.com"
@@ -53,6 +54,17 @@ def staple_command(archive: str) -> list[str]:
 def windows_sign_command(path: str, env) -> list[str]:
     """`signtool sign` d'un `.exe` : SHA-256, horodatage RFC 3161."""
     return [
-        "signtool", "sign", "/fd", "SHA256", "/f", env["WINDOWS_CERT_FILE"], "/p", env["WINDOWS_CERT_PASSWORD"],
-        "/tr", env.get("WINDOWS_TIMESTAMP_URL") or TIMESTAMP_URL, "/td", "SHA256", path,
+        "signtool",
+        "sign",
+        "/fd",
+        "SHA256",
+        "/f",
+        env["WINDOWS_CERT_FILE"],
+        "/p",
+        env["WINDOWS_CERT_PASSWORD"],
+        "/tr",
+        env.get("WINDOWS_TIMESTAMP_URL") or TIMESTAMP_URL,
+        "/td",
+        "SHA256",
+        path,
     ]

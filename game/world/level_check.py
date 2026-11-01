@@ -2,6 +2,7 @@
 
 Logique pure, utilisée par les tests pour que toute carte (livrée ou future) reste jouable.
 """
+
 from __future__ import annotations
 
 import copy
@@ -211,13 +212,4 @@ def complexity(tilemap) -> float:
     """
     utility = sum(1 for s in tilemap.spawns_of("terminal") if not tilemap.terminal_spec((s.tx, s.ty)).can("data"))
     badge = max((need for _, need in tilemap.door_groups()), default=0)
-    return (
-        2 * len(tilemap.spawns_of("guard"))
-        + 1.5 * len(tilemap.door_groups())
-        + 2 * len(tilemap.fields)
-        + len(tilemap.buttons)
-        + 2 * len(tilemap.cameras)
-        + 1.5 * utility
-        + 2 * badge
-        + tilemap.width * tilemap.height / 200
-    )
+    return 2 * len(tilemap.spawns_of("guard")) + 1.5 * len(tilemap.door_groups()) + 2 * len(tilemap.fields) + len(tilemap.buttons) + 2 * len(tilemap.cameras) + 1.5 * utility + 2 * badge + tilemap.width * tilemap.height / 200

@@ -1,4 +1,5 @@
 """Objets du joueur : types d'objets et inventaire. Logique pure, sans fenêtre."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

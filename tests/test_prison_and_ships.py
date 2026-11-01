@@ -1,5 +1,6 @@
 """Nouveaux objectifs : libérer un prisonnier (cellules, barreaux, terminal « cellules », prisonnier qui suit) et voler un vaisseau
 (console de libération, rayons tracteurs et attaches, passerelle d'embarquement)."""
+
 import pygame
 import pytest
 
@@ -489,9 +490,14 @@ def test_the_events_have_their_sounds():
     calls = []
 
     class Audio:
-        def play(self, name, volume=1.0, pan=0.0): calls.append(name)
-        def play_at(self, *a, **k): pass
-        def stop_loop(self, name): pass
+        def play(self, name, volume=1.0, pan=0.0):
+            calls.append(name)
+
+        def play_at(self, *a, **k):
+            pass
+
+        def stop_loop(self, name):
+            pass
 
     bus = EventBus()
     SoundDirector(Audio(), bus).attach()

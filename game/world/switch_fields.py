@@ -11,6 +11,7 @@ Un champ qui doit s'activer alors qu'une entité occupe sa zone reste « en atte
 devient solide que lorsque la zone est libre : personne ne se retrouve coincé dans un champ.
 Logique pure : le rendu est dans `prop_art.py`, l'interaction dans `entities/field_button.py`.
 """
+
 from __future__ import annotations
 
 import string
@@ -111,9 +112,7 @@ def _parse_button(config: SwitchConfig, number: int, words: list[str]) -> None:
 
 
 # --- Construction et vérification --------------------------------------------
-def build_switches(
-    config: SwitchConfig, field_cells: dict[str, list[Cell]], button_cells: dict[str, list[Cell]]
-) -> tuple[dict[str, Field], dict[str, ButtonSpec], list[str]]:
+def build_switches(config: SwitchConfig, field_cells: dict[str, list[Cell]], button_cells: dict[str, list[Cell]]) -> tuple[dict[str, Field], dict[str, ButtonSpec], list[str]]:
     """Croise la carte et la configuration. Erreurs (ValueError, en français, avec la ligne) ; renvoie aussi les avertissements."""
     for letter, cells in field_cells.items():
         if letter not in config.fields:
@@ -152,11 +151,7 @@ def build_switches(
     for letter, f in fields.items():
         f.color = colors_by_field.get(letter, 0)
 
-    warnings = [
-        f"Ligne {config.fields[letter][1]} : le champ '{letter}' n'est lié à aucun bouton, il gardera son état de départ"
-        for letter, f in fields.items()
-        if not f.buttons
-    ]
+    warnings = [f"Ligne {config.fields[letter][1]} : le champ '{letter}' n'est lié à aucun bouton, il gardera son état de départ" for letter, f in fields.items() if not f.buttons]
     return fields, buttons, warnings
 
 

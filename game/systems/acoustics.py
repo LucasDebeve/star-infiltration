@@ -3,6 +3,7 @@
 Pur (aucune sortie sonore). Un mur ou une porte fermée entre la source et le joueur rend le son sourd (filtre passe-bas, volume
 réduit) ; la surface de la zone connexe où retentit un son décide de son écho : un hangar résonne, un bureau non.
 """
+
 from __future__ import annotations
 
 import pygame

@@ -1,4 +1,5 @@
 """Fenêtre et boucle principale."""
+
 from __future__ import annotations
 
 import pygame

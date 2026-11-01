@@ -3,6 +3,7 @@
 Logique pure, sans carte son : `Audio` s'en sert pour fabriquer, une fois par son, les variantes étouffées (derrière un
 mur) ou résonantes (grande salle). Rien n'est précalculé : une variante n'existe que quand on l'entend pour la première fois.
 """
+
 from __future__ import annotations
 
 import math
@@ -50,7 +51,7 @@ def echo(raw: bytes, channels: int, rate: int, taps) -> bytes:
     for delay, gain in taps:
         shift = round(delay * rate) * channels
         scaled = [v * gain for v in samples]
-        mixed[shift:shift + len(scaled)] = map(add, mixed[shift:shift + len(scaled)], scaled)
+        mixed[shift : shift + len(scaled)] = map(add, mixed[shift : shift + len(scaled)], scaled)
     peak = max(abs(v) for v in mixed)
     scale = PEAK / peak if peak > PEAK else 1.0  # on ramène sous le maximum d'un 16 bits plutôt que de saturer
     return array("h", (int(v * scale) for v in mixed)).tobytes()

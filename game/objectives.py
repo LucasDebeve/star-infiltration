@@ -7,6 +7,7 @@ quel point rendre atteignable, `campaign` y valide le champ `objective` des miss
 Pour ajouter un objectif : une entrée ici, une entité interactive dans `game/entities/`, une branche dans
 `PlayScene.objective_done`, et ses tuiles dans `Tilemap` (voir `FREE_PRISONER`, déjà préparé).
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

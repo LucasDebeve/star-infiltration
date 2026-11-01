@@ -5,6 +5,7 @@ poursuite, piratage, capture) et tremble sous les chocs (alerte, coupure de cour
 indépendant de la cadence d'images. `offset`/`world_to_screen` incluent la secousse ; le zoom est une mise à l'échelle
 de l'image finale, que la scène applique (voir `zoom_point` / `screen_to_world` pour passer d'un repère à l'autre).
 """
+
 import math
 
 import pygame

@@ -4,6 +4,7 @@ Principe du rendu : le texte est dessiné à plat sur une grande image jaune ; �
 prend la rangée de texte que la perspective y projette, et la largeur diminue vers l'horizon (le texte s'éloigne).
 Les calculs (mise en page, projection, déroulé) sont purs et testés sans fenêtre.
 """
+
 from __future__ import annotations
 
 import math
@@ -79,9 +80,7 @@ def render_crawl_text(episode: str, title: str, paragraphs: Sequence[str], fonts
         lines = wrap_words(paragraph, measure, width)
         for i, words in enumerate(lines):
             blocks.append(("line", (words, i == len(lines) - 1), 0 if i else round(line_h * PARAGRAPH_GAP)))
-    height = sum(
-        (item.get_height() if kind == "center" else line_h) + gap for kind, item, gap in blocks
-    ) + line_h
+    height = sum((item.get_height() if kind == "center" else line_h) + gap for kind, item, gap in blocks) + line_h
     surf = pygame.Surface((width, height), pygame.SRCALPHA)
     y = 0
     for kind, item, gap in blocks:
@@ -217,7 +216,7 @@ class HoldToSkip:
 # --- Titre et accroche ------------------------------------------------------------------------------
 def draw_logo(surface: pygame.Surface, logo: pygame.Surface, progress: float) -> None:
     """Le titre commence grand et s'éloigne jusqu'à disparaître au centre de l'écran."""
-    eased = progress ** 0.8
+    eased = progress**0.8
     scale = LOGO_START_SCALE * (1.0 - eased)
     if scale < 0.02:
         return

@@ -3,6 +3,7 @@
 Le fichier est tolérant : absent, illisible ou partiellement faux, le jeu retombe sur les valeurs par défaut
 au lieu de planter. `STAR_INFILTRATION_HOME` permet de rediriger le dossier (tests, installation portable).
 """
+
 from __future__ import annotations
 
 import json

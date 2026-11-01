@@ -1,4 +1,5 @@
 """Carte de la campagne, générique, résultats, et les enchaînements entre eux."""
+
 import pygame
 import pytest
 

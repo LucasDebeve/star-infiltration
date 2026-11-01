@@ -4,6 +4,7 @@ Il n'existe qu'en développement : on l'active avec `python main.py --dev` (ou l
 et **jamais** dans un exécutable empaqueté ni dans la version web. Les parties lancées depuis le menu développeur ne comptent pas
 pour la progression (elles n'ont pas de mission : pas de score, pas d'enregistrement). Logique pure, sans fenêtre.
 """
+
 from __future__ import annotations
 
 import os

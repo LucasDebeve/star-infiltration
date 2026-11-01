@@ -3,6 +3,7 @@
 Le navigateur réclame une boucle asynchrone qui lui rend la main à chaque image : c'est `Game.run_async`. Ce fichier est copié
 à la racine du paquet web par `packaging/build.py web` ; il n'est pas utilisé autrement.
 """
+
 import asyncio
 
 from game.core.game import Game

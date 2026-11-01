@@ -3,6 +3,7 @@
 Tout est dessiné par le code (pas d'image à charger). Les sprites sont mis en cache : seul le champ de force
 est animé, et il ne redessine que quelques lignes par image.
 """
+
 from __future__ import annotations
 
 import math

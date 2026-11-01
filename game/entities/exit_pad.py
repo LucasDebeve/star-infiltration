@@ -1,4 +1,5 @@
 """Zone d'extraction : on ne peut l'utiliser qu'une fois l'objectif de la mission accompli (par défaut, avec les données volées)."""
+
 from __future__ import annotations
 
 import math

@@ -3,6 +3,7 @@
 Placement pur et déterministe (hachage des positions) : la même carte donne toujours le même décor, sans qu'il faille
 rien écrire dans le fichier de carte. Ce décor est purement visuel : il ne bloque ni le passage ni la vue.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

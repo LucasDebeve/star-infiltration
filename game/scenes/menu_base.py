@@ -1,4 +1,5 @@
 """Base commune des scènes de menu : clavier, souris, fond animé, titre, sons."""
+
 from __future__ import annotations
 
 import pygame

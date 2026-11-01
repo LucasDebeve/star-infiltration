@@ -1,4 +1,5 @@
 """Le prisonnier : captif dans sa cellule, il se délivre (maintenir E, une fois la cellule ouverte) puis suit le joueur jusqu'à la sortie."""
+
 from __future__ import annotations
 
 import math

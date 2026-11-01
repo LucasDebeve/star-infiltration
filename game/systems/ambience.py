@@ -7,6 +7,7 @@ le bourdonnement des lampes salle après salle, et plus rien d'une pièce dont l
 
 `audio` est tout objet qui offre `set_ambient(nom, volume, balance)` et `stop_ambient()` : les tests injectent un faux.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

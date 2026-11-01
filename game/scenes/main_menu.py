@@ -1,4 +1,5 @@
 """Menu principal : campagne, réglages, quitter."""
+
 from __future__ import annotations
 
 from game.scenes.campaign_scene import CampaignScene

@@ -1,4 +1,5 @@
 """Terminal : un menu d'opérations (télécharger des données, désactiver des caméras, couper la lumière d'une salle)."""
+
 from __future__ import annotations
 
 import math

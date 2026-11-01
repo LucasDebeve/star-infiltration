@@ -10,6 +10,7 @@ Disposition (norme SDL, boutons nommés comme sur une manette Xbox) :
 Un « pad » est tout objet qui offre `get_axis(axe) -> -1..1`, `get_button(bouton) -> bool`, `name` et `instance_id` :
 les tests en injectent un faux.
 """
+
 from __future__ import annotations
 
 import pygame

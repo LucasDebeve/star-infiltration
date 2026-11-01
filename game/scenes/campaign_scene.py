@@ -1,4 +1,5 @@
 """Carte de la campagne : on choisit une mission parmi celles débloquées, on voit les rangs obtenus et ceux à viser."""
+
 from __future__ import annotations
 
 import math

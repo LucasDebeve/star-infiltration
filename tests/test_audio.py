@@ -9,13 +9,53 @@ from game.settings import ALERT_LOOP_VOLUME, DUCK_VOLUME, HACK_TICK_INTERVAL, SO
 from game.systems.sound_director import SoundDirector
 
 SOUND_NAMES = [
-    "step_walk", "door_open", "door_denied", "pickup", "hack_tick", "hack_done", "decoy_throw",
-    "decoy_beep", "suspect", "spotted", "alert", "reinforcements", "lockdown", "caught", "win",
-    "ui_move", "ui_select", "ui_back", "music_ambient", "music_tension",
-    "amb_engine", "amb_lamp", "amb_field", "amb_terminal", "amb_console", "button_press", "field_on", "field_off", "power_down", "steam_vent",
-    "terminal_open", "camera_off", "lights_out", "tractor_off", "cell_open", "locker_open", "disguise",
-    "voice_suspect_1", "voice_suspect_2", "voice_suspect_3", "voice_chase_1", "voice_chase_2", "voice_chase_3", "voice_lost_1", "voice_lost_2",
-    "voice_radio_1", "voice_radio_2",
+    "step_walk",
+    "door_open",
+    "door_denied",
+    "pickup",
+    "hack_tick",
+    "hack_done",
+    "decoy_throw",
+    "decoy_beep",
+    "suspect",
+    "spotted",
+    "alert",
+    "reinforcements",
+    "lockdown",
+    "caught",
+    "win",
+    "ui_move",
+    "ui_select",
+    "ui_back",
+    "music_ambient",
+    "music_tension",
+    "amb_engine",
+    "amb_lamp",
+    "amb_field",
+    "amb_terminal",
+    "amb_console",
+    "button_press",
+    "field_on",
+    "field_off",
+    "power_down",
+    "steam_vent",
+    "terminal_open",
+    "camera_off",
+    "lights_out",
+    "tractor_off",
+    "cell_open",
+    "locker_open",
+    "disguise",
+    "voice_suspect_1",
+    "voice_suspect_2",
+    "voice_suspect_3",
+    "voice_chase_1",
+    "voice_chase_2",
+    "voice_chase_3",
+    "voice_lost_1",
+    "voice_lost_2",
+    "voice_radio_1",
+    "voice_radio_2",
 ]
 
 
@@ -46,7 +86,7 @@ def test_music_crossfade_keeps_constant_power():
     assert music_levels(0.0) == (1.0, 0.0) and music_levels(1.0) == (0.0, 1.0)
     for t in (0.1, 0.5, 0.9):
         calm, tense = music_levels(t)
-        assert calm ** 2 + tense ** 2 == pytest.approx(1.0)
+        assert calm**2 + tense**2 == pytest.approx(1.0)
     assert music_levels(-5) == music_levels(0) and music_levels(5) == music_levels(1)
 
 

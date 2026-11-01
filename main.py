@@ -4,6 +4,7 @@ Options : `--version` (affiche la version), `--check` (contrôle les cartes et l
 `--portable` (enregistre préférences et progression à côté du jeu, dans un dossier `data/`),
 `--dev` (mode développeur : menu pour jouer n'importe quel niveau, invincibilité... ; absent des exécutables livrés).
 """
+
 from __future__ import annotations
 
 import argparse

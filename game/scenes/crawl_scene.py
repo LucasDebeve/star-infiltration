@@ -3,6 +3,7 @@
 Phrase d'accroche bleue (si la mission en a une) -> titre qui s'éloigne -> texte qui défile -> la mission commence.
 On peut passer l'introduction en maintenant Espace, Entrée ou Échap une seconde.
 """
+
 from __future__ import annotations
 
 import pygame

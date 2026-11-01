@@ -3,6 +3,7 @@
 Une opération démarre une connexion : le menu se ferme, et le joueur doit rester près du terminal jusqu'à son terme
 (voir `PlayScene.start_terminal_job`). Échap ferme le menu sans rien faire.
 """
+
 from __future__ import annotations
 
 import pygame

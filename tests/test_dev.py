@@ -1,4 +1,5 @@
 """Mode développeur : activé seulement par `--dev`/variable d'environnement, jamais en version livrée ; jouer n'importe quel niveau."""
+
 import pygame
 import pytest
 

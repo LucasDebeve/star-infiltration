@@ -5,6 +5,7 @@ Chaque action a deux emplacements de touche (par exemple Z et la flèche haut po
 et par la scène de jeu) ; elles sont enregistrées dans les préférences sous forme de noms de touches, tolérants aux
 erreurs : un nom inconnu retombe sur la touche par défaut.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -148,11 +149,7 @@ class KeyBindings:
     def to_prefs(self) -> dict[str, list[str | None]]:
         """Seules les actions modifiées sont enregistrées, par noms de touches (indépendants de la version de pygame)."""
         default = KeyBindings()
-        return {
-            action: [pygame.key.name(key) if key is not None else None for key in self.slots[action]]
-            for action in ACTIONS
-            if self.slots[action] != default.slots[action]
-        }
+        return {action: [pygame.key.name(key) if key is not None else None for key in self.slots[action]] for action in ACTIONS if self.slots[action] != default.slots[action]}
 
     @classmethod
     def from_prefs(cls, data) -> KeyBindings:

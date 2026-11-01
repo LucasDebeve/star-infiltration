@@ -5,6 +5,7 @@ Une fois donnée, l'alerte ne se lève plus : il faut s'échapper avant la fin d
 Événements émis sur l'`EventBus` : `alert_raised(pos)`, `reinforcements_arrived(count)`, `lockdown()`.
 Logique pure : le système ne dessine rien et crée les gardes sans les ajouter lui-même au jeu.
 """
+
 from __future__ import annotations
 
 import pygame

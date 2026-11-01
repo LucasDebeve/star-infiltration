@@ -13,6 +13,7 @@ d'abord là où on lui indique, puis garde la sortie.
 La détection n'est pas instantanée : tant que le joueur est dans le cône, la « méfiance »
 (`awareness`, de 0 à 1) monte, plus vite de près et quand le joueur court. À 1, c'est la poursuite.
 """
+
 from __future__ import annotations
 
 import math
@@ -113,9 +114,7 @@ class Guard(Entity):
         return cls(route, angle)
 
     @classmethod
-    def reinforcement(
-        cls, tilemap, spawn_tile: tuple[int, int], post_tile: tuple[int, int], stay: float = REINFORCE_STAY_TIME
-    ) -> Guard:
+    def reinforcement(cls, tilemap, spawn_tile: tuple[int, int], post_tile: tuple[int, int], stay: float = REINFORCE_STAY_TIME) -> Guard:
         """Renfort arrivé en `spawn_tile` ; une fois sa fouille finie, il patrouille entre son arrivée et `post_tile`."""
         ts = tilemap.tile_size
         route = [pygame.Vector2((tx + 0.5) * ts, (ty + 0.5) * ts) for tx, ty in (spawn_tile, post_tile)]
@@ -154,11 +153,7 @@ class Guard(Entity):
         """Réagit à un bruit : va enquêter s'il l'entend et peut l'atteindre. Renvoie vrai si c'est le cas."""
         if self.state is GuardState.CHASE or not hears(tilemap, self.pos, source, radius):
             return False
-        already_there = (
-            self.state is GuardState.INVESTIGATE
-            and self.destination is not None
-            and self.destination.distance_to(source) < tilemap.tile_size
-        )
+        already_there = self.state is GuardState.INVESTIGATE and self.destination is not None and self.destination.distance_to(source) < tilemap.tile_size
         return already_there or self._investigate(tilemap, source)
 
     # --- Boucle --------------------------------------------------------------
@@ -316,8 +311,15 @@ class Guard(Entity):
         center = camera.world_to_screen(self.pos)
         color = COLORS[f"guard_{self.state.value}"]
         draw_guard(
-            surface, center, self.facing, color, self.walk_phase, self.stride,
-            aiming=self.state is GuardState.CHASE, reinforcement=self.is_reinforcement, time=self._age,
+            surface,
+            center,
+            self.facing,
+            color,
+            self.walk_phase,
+            self.stride,
+            aiming=self.state is GuardState.CHASE,
+            reinforcement=self.is_reinforcement,
+            time=self._age,
         )
         if self.is_reinforcement:  # anneau bleu : on reconnaît les renforts au premier coup d'œil
             pygame.draw.circle(surface, COLORS["guard_reinforcement"], center, round(self._radius) + 3, 2)

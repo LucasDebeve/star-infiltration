@@ -1,5 +1,6 @@
 """La campagne monte en difficulté : chaque niveau est plus complexe que le précédent, introduit ses nouveautés au bon moment,
 reste faisable de bout en bout et laisse le temps de fuir."""
+
 import math
 
 import pygame
@@ -278,7 +279,14 @@ def play_hq(runner, scene):
 
 
 PLAYTHROUGHS = {
-    "uniform": play_uniform, "hq": play_hq, "outpost": play_outpost, "radar": play_radar, "prison": play_prison, "hangar": play_hangar, "theft": play_theft, "destroyer": play_destroyer,
+    "uniform": play_uniform,
+    "hq": play_hq,
+    "outpost": play_outpost,
+    "radar": play_radar,
+    "prison": play_prison,
+    "hangar": play_hangar,
+    "theft": play_theft,
+    "destroyer": play_destroyer,
 }
 
 

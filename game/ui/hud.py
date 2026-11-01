@@ -1,4 +1,5 @@
 """HUD : posture, alerte, objectif, inventaire, invite d'interaction, messages, aide, debug."""
+
 from __future__ import annotations
 
 import math
@@ -21,8 +22,7 @@ def help_lines() -> tuple[str, str]:
     label = bindings.label
     return (
         f"{label('move')} : se déplacer     {label('run')} : courir (bruyant)     {label('crouch')} : s'accroupir (silencieux)",
-        f"{label('interact')} : interagir (maintenir pour pirater)     {label('throw')} : lancer un leurre     "
-        f"{label('pause')} : pause     {label('restart')} : recommencer (fin de mission)",
+        f"{label('interact')} : interagir (maintenir pour pirater)     {label('throw')} : lancer un leurre     {label('pause')} : pause     {label('restart')} : recommencer (fin de mission)",
     )
 
 

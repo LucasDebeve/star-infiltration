@@ -3,6 +3,7 @@
 Mêmes lampes et même décroissance que le rendu (`ui/lighting.py`), mais calculé en un seul point, sans fenêtre : c'est ce
 que lisent les gardes et les caméras (via `Player.light_factor`). Les murs arrêtent la lumière (ligne de vue lampe-point).
 """
+
 from __future__ import annotations
 
 import pygame

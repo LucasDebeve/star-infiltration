@@ -1,4 +1,5 @@
 """Lecture des entrées, transformée en un état simple (facile à simuler dans les tests)."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

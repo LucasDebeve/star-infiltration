@@ -2,6 +2,7 @@
 
 Une seule source : ici. Le `.spec` PyInstaller, le script Inno Setup, le `.desktop` Linux et l'`Info.plist` macOS en dérivent.
 """
+
 from __future__ import annotations
 
 APP_NAME = "Star Infiltration"

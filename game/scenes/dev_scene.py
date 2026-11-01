@@ -2,6 +2,7 @@
 
 Les parties lancées d'ici n'ont pas de mission : ni score, ni enregistrement, la progression n'est pas touchée.
 """
+
 from __future__ import annotations
 
 from pathlib import Path

@@ -2,6 +2,7 @@
 
 Tout dépend du temps : rien n'est mis en cache.
 """
+
 from __future__ import annotations
 
 import math

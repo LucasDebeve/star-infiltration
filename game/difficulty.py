@@ -1,4 +1,5 @@
 """Niveaux de difficulté : réglages de la détection et de l'alerte. Logique pure."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
@@ -14,7 +15,6 @@ class Difficulty:
     lockdown_time: float  # secondes entre l'alerte et le verrouillage du croiseur
     waves: int  # vagues de renforts pendant une alerte
     reinforcement_stay: float  # secondes de présence d'un renfort
-
 
     def for_map(self, settings) -> Difficulty:
         """Cette difficulté avec les réglages d'une carte : ils valent pour la difficulté normale, les autres suivent la même proportion

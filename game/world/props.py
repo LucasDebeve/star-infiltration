@@ -3,6 +3,7 @@
 Les tuiles `B`, `S` et `F` de la carte sont regroupées en « props » (une caisse de 2 × 2 tuiles est un seul
 conteneur, pas quatre caisses). Le dessin est dans `prop_art.py`.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

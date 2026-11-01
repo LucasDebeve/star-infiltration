@@ -1,4 +1,5 @@
 """Le joueur : déplacement à trois postures (accroupi / marche / course) et visée à la souris."""
+
 from __future__ import annotations
 
 import math

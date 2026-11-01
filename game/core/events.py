@@ -3,6 +3,7 @@
 Sert à découpler les systèmes : par exemple un garde émet `"alert_raised"`,
 et le HUD, l'éclairage et les autres gardes y réagissent sans se connaître.
 """
+
 from collections import defaultdict
 from typing import Any, Callable
 

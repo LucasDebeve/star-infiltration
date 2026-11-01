@@ -2,6 +2,7 @@
 
 Logique pure (sans fenêtre) : le rendu est dans `game/ui/lighting.py`.
 """
+
 from __future__ import annotations
 
 import math
@@ -41,9 +42,7 @@ class LightSpec:
 
 
 def _free_neighbors(tilemap, tx: int, ty: int) -> int:
-    return sum(
-        not tilemap.is_solid(tx + dx, ty + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1) if (dx, dy) != (0, 0)
-    )
+    return sum(not tilemap.is_solid(tx + dx, ty + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1) if (dx, dy) != (0, 0))
 
 
 def _tile_hash(tx: int, ty: int) -> int:

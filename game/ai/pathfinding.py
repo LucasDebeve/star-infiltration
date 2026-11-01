@@ -4,6 +4,7 @@ Déplacements à 8 directions ; une diagonale n'est permise que si les deux tuil
 sont libres (pas de « coupe-coin » à travers un angle de mur).
 Fonctions pures : seule `tilemap.is_solid` / `tile_size` / `world_to_tile` est utilisée.
 """
+
 from __future__ import annotations
 
 import heapq

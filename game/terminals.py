@@ -4,6 +4,7 @@ Un terminal n'a pas tous les pouvoirs par défaut : sans directive, il ne sert q
     @terminal x,y -> data lights cameras cells  (dans n'importe quel ordre)
     @terminal x,y -> cameras:ab                 (seulement les caméras des groupes a et b ; `cameras` seul = toutes)
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

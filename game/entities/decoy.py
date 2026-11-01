@@ -1,4 +1,5 @@
 """Leurre sonore : bipe à intervalle régulier et attire les gardes, puis s'éteint."""
+
 from __future__ import annotations
 
 import math

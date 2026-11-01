@@ -12,6 +12,7 @@ Le système choisit le plus proche à portée, gère l'appui / le maintien, et s
 par l'`EventBus` (`interaction_denied`, `item_picked`, ...), sans rien savoir de l'affichage.
 Entièrement pur : les tests le pilotent avec `pressed` / `held`.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

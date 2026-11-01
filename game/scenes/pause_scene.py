@@ -1,4 +1,5 @@
 """Menu pause : reprendre, recommencer, réglages, retour au menu principal, quitter."""
+
 from __future__ import annotations
 
 import pygame

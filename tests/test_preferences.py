@@ -97,7 +97,10 @@ def test_normal_matches_the_tuned_constants():
 
     normal = get_difficulty("normal")
     assert (normal.detect, normal.lockdown_time, normal.waves, normal.reinforcement_stay) == (
-        1.0, LOCKDOWN_TIME, REINFORCE_WAVES, REINFORCE_STAY_TIME,
+        1.0,
+        LOCKDOWN_TIME,
+        REINFORCE_WAVES,
+        REINFORCE_STAY_TIME,
     )
 
 

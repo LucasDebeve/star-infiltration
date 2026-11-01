@@ -1,4 +1,5 @@
 """Décor vivant : écrans, voyants, lanternes, bouches de vapeur, vent et poussière en suspension."""
+
 import math
 
 import pygame
@@ -234,9 +235,14 @@ def test_vent_bursts_become_a_sound_from_their_position():
     calls = []
 
     class Audio:
-        def play(self, *a, **k): calls.append(("play", a))
-        def play_at(self, name, source, listener, volume=1.0): calls.append(("at", name, tuple(source)))
-        def stop_loop(self, name): pass
+        def play(self, *a, **k):
+            calls.append(("play", a))
+
+        def play_at(self, name, source, listener, volume=1.0):
+            calls.append(("at", name, tuple(source)))
+
+        def stop_loop(self, name):
+            pass
 
     bus = EventBus()
     SoundDirector(Audio(), bus).attach()

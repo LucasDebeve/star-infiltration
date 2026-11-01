@@ -1,4 +1,5 @@
 """Empaquetage (E6) : chemins d'un exécutable figé, options de main.py, contrôle d'intégrité, outils de construction."""
+
 import asyncio
 import importlib.util
 import os

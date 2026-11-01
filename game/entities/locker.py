@@ -1,4 +1,5 @@
 """Casier d'officier : on le fouille (maintenir E) pour y dérober un uniforme impérial."""
+
 from __future__ import annotations
 
 import pygame

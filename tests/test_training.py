@@ -1,4 +1,5 @@
 """Le niveau d'entraînement doit rester simple : une découverte par salle, de gauche à droite, un seul garde."""
+
 import pygame
 import pytest
 

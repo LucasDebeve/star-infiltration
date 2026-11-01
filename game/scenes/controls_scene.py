@@ -1,4 +1,5 @@
 """Commandes : remapper les touches du clavier et régler l'usage de la manette. Enregistré dès qu'on change quelque chose."""
+
 from __future__ import annotations
 
 import pygame

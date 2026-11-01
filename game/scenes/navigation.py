@@ -3,6 +3,7 @@
 Les imports sont faits à l'appel : ces scènes se connaissent entre elles (le jeu ouvre les résultats, les résultats
 renvoient à la campagne...), et des imports en tête de fichier feraient une boucle.
 """
+
 from __future__ import annotations
 
 

@@ -3,6 +3,7 @@
 Les missions viennent d'un fichier JSON (`assets/campaign.json`) : ajouter une mission, c'est ajouter une entrée,
 sans toucher au code. Une mission se débloque en terminant la précédente (la première l'est dès le départ).
 """
+
 from __future__ import annotations
 
 import json

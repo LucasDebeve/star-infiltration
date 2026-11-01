@@ -1,5 +1,6 @@
 """Caméra de surveillance : un cône qui balaie, fixé à un mur. Elle repère le joueur comme un garde (méfiance qui monte),
 mais ne bouge pas de sa place : elle prévient les gardes. Un terminal peut la désactiver quelque temps."""
+
 from __future__ import annotations
 
 import math

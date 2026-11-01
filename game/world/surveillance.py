@@ -5,6 +5,7 @@ x,y est la tuile de **mur** qui porte la caméra ; la direction est celle où el
 lettre (a par défaut) que les terminaux désignent (`@terminal ... cameras:a`) ; l'amplitude du balayage est en degrés
 de chaque côté de l'axe (42 par défaut).
 """
+
 from __future__ import annotations
 
 import math

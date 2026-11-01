@@ -2,6 +2,7 @@
 
 Fonctions et classes pures (sans fenêtre) : faciles à tester.
 """
+
 from __future__ import annotations
 
 import math

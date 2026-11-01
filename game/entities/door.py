@@ -3,6 +3,7 @@
 La logique est immédiate : à l'activation, les tuiles deviennent praticables. L'animation (deux vantaux qui
 rentrent dans les murs) est purement visuelle, pour ne jamais retarder le joueur.
 """
+
 from __future__ import annotations
 
 import math
