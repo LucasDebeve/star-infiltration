@@ -6,6 +6,8 @@ Le navigateur réclame une boucle asynchrone qui lui rend la main à chaque imag
 
 import asyncio
 
+import pygame  # noqa: F401  (pygbag lit les import de ce fichier pour savoir quoi installer : sans cette ligne, pygame-ce manque dans le navigateur)
+
 from game.core.game import Game
 from game.scenes.main_menu import MainMenuScene
 

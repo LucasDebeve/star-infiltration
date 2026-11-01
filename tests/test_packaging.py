@@ -276,3 +276,12 @@ def test_with_ffmpeg_every_wav_becomes_an_ogg_and_disappears(build, tmp_path):
     sounds = stage / "assets" / "sounds"
     assert converted and all(p.suffix == ".ogg" and p.exists() for p in converted) and not list(sounds.glob("*.wav"))
     assert all(c[0] == "/usr/bin/ffmpeg" and "libvorbis" in c for c in commands) and len(commands) == len(converted)
+
+
+def test_the_web_entry_point_imports_pygame_so_pygbag_installs_it():
+    """pygbag ne lit que les import de main.py : sans `import pygame` ici, le jeu plante dans le navigateur (pygame est un paquet vide)."""
+    import ast
+
+    tree = ast.parse((Path(__file__).resolve().parents[1] / "packaging" / "web" / "main.py").read_text(encoding="utf-8"))
+    imported = {alias.name for node in ast.walk(tree) if isinstance(node, ast.Import) for alias in node.names}
+    assert "pygame" in imported
