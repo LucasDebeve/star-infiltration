@@ -12,27 +12,38 @@ on:
     branches: [main]
     tags: ["v*"]
   pull_request:
+  workflow_dispatch:
+
+# Un nouveau push annule l'exécution en cours de la même branche (les tags ne sont jamais annulés).
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+permissions:
+  contents: read
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
+        with: { python-version: "3.11", cache: pip }
       - run: pip install ruff
       - run: ruff check .
 
   test:
     needs: lint
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     env:
       SDL_VIDEODRIVER: dummy
       SDL_AUDIODRIVER: dummy
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
+        with: { python-version: "3.11", cache: pip }
       - run: pip install -r requirements-dev.txt
       - run: pytest -q
       - run: python main.py --check
@@ -44,6 +55,7 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
     env:
       CODESIGN_IDENTITY: ${{ secrets.CODESIGN_IDENTITY }}
       APPLE_ID: ${{ secrets.APPLE_ID }}
@@ -53,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
+        with: { python-version: "3.11", cache: pip }
       - run: pip install -r requirements-build.txt
 
       # macOS : le certificat entre dans un trousseau temporaire (sans secret, on ne signe pas).
@@ -108,6 +120,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
+          if-no-files-found: error
           name: executable-${{ matrix.os }}
           path: |
             dist/*.zip
@@ -118,14 +131,19 @@ jobs:
   web:
     needs: test
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
+        with: { python-version: "3.11", cache: pip }
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: pip install -r requirements-build.txt
       - run: python packaging/build.py web --strict   # sons convertis en .ogg : sans ffmpeg, la construction échoue
       # Vérification de bout en bout dans un vrai navigateur : la page charge, le menu démarre, aucune erreur Python en console.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('.github/workflows/build.yml') }}
       - run: |
           pip install playwright pillow
           playwright install --with-deps chromium
@@ -136,18 +154,21 @@ jobs:
         with:
           name: web-smoke-screenshot
           path: dist/web-smoke.png
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
+          if-no-files-found: error
           name: web
           path: dist/*-web.zip
 
   source:
     needs: test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
+        with: { python-version: "3.11", cache: pip }
       - run: python packaging/build.py zip
       - uses: actions/upload-artifact@v4
         with:
