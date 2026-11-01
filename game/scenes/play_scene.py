@@ -105,7 +105,7 @@ class PlayScene(Scene):
         self._start_level()
         self._aim_offset = None
         self._shake_handlers = {  # événements qui font trembler la caméra
-            **{name: (lambda amount: lambda **_: self._shake(amount))(amount) for name, amount in SHAKE_EVENTS.items()},
+            **{name: lambda amount=amount, **_: self._shake(amount) for name, amount in SHAKE_EVENTS.items()},
             "door_opened": lambda door, **_: self._shake(SHAKE_DOOR, door.anchor),
             "field_toggled": lambda field, **_: self._shake(SHAKE_FIELD, self._field_center(self.tilemap.fields[field])),
         }
