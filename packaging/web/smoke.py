@@ -18,7 +18,7 @@ WAIT_MS = 25_000  # le temps de télécharger le moteur Python/WebAssembly et de
 MAX_WAIT_MS = 120_000  # on sonde la capture jusqu'à ce délai : un runner lent met plus longtemps à charger le moteur
 POLL_MS = 5_000
 BAD_MARKERS = ("Traceback", "Uncaught", "ModuleNotFoundError", "ImportError", "pygame.error", "Error:")
-IGNORED = ("favicon", "net::ERR_BLOCKED_BY_CLIENT", "AudioContext")  # bruit sans conséquence
+IGNORED = ("favicon", "ERR_BLOCKED_BY_ORB", "net::ERR_BLOCKED_BY_CLIENT", "AudioContext")  # bruit sans conséquence
 
 
 def console_problems(messages: list[str]) -> list[str]:
@@ -72,14 +72,15 @@ def main(argv: list[str]) -> int:
             page.on("requestfailed", lambda r: print("requête échouée :", r.url, r.failure))
             page.goto(f"http://127.0.0.1:{port}/index.html")
             page.wait_for_selector("canvas", timeout=WAIT_MS)
-            page.mouse.click(640, 360)  # geste utilisateur : sans lui, pygbag attend « Ready to start »
-            page.wait_for_timeout(WAIT_MS)
-            page.screenshot(path=str(shot))
-            waited = WAIT_MS
-            while shot_is_blank(shot) and waited < MAX_WAIT_MS:  # moteur encore en téléchargement : on réessaie
+            # pygbag n'affiche « Ready to start » qu'une fois le moteur chargé : un clic trop précoce est perdu, on reclique à chaque sondage.
+            waited = 0
+            while True:
+                page.mouse.click(640, 360)
                 page.wait_for_timeout(POLL_MS)
                 waited += POLL_MS
                 page.screenshot(path=str(shot))
+                if waited >= WAIT_MS and not shot_is_blank(shot) or waited >= MAX_WAIT_MS:
+                    break
             browser.close()
     finally:
         server.shutdown()
